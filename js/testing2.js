@@ -1,17 +1,14 @@
-var apiBaseUrl, data;
+var apiBaseUrl, data, user_id;
 
-apiBaseUrl = 'http://localhost:8000/api/generate_profile2/'
+apiBaseUrl = 'http://localhost:8000/api/generate_profile/'
 
 async function create_profile () {
-    data = document.getElementById('user_id').value;
-    data = {"user_id": data}
 
-    localStorage.setItem("user_id", data);
+    user_id = localStorage.user_id;
 
-    url = fetch(apiBaseUrl + '?user_id=' + data)
+    url = fetch(apiBaseUrl + '?user_id=' + user_id + '?code=' + window.location)
     .then(res => res.json())
-    .then(json => {s
+    .then(json => {
         console.log(json);
-        window.location = json.auth_url;
     });
 }

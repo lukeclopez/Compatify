@@ -12,3 +12,5 @@ async function create_profile () {
         console.log(json);
     });
 }
+
+create_profile();

@@ -12,7 +12,7 @@ async function auth () {
     .then(res => res.json())
     .then(json => {
         console.log(json);
-        //window.location = json.auth_url;
+        window.location = json.auth_url;
     });
     
 }

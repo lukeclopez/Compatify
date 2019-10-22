@@ -16,7 +16,6 @@ import Logout from "./components/logout";
 import auth from "./services/authService";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
-import CreateProfile from "./components/createProfile";
 
 class App extends Component {
   state = {};

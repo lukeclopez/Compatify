@@ -1,7 +1,7 @@
 [build]
   command = "npm run build"
-  publish = "compatify-app/build"
-  base = "compatify-app/"
+  publish = "/build"
+  base = "compatify-app"
 
   [[redirects]]
   from = "/*"

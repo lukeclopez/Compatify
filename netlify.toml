@@ -1,7 +1,7 @@
 [build]
   command = "npm run build"
-  publish="compatify-app\build"
-  base = "compatify-app\src\App.js"
+  publish = "compatify-app/build"
+  base = "compatify-app/src/App.js"
 
   [[redirects]]
   from = "/*"

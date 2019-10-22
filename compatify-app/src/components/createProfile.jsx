@@ -4,11 +4,8 @@ import sptfy from "../services/spotifyService";
 class CreateProfile extends Component {
   state = {};
 
-  componentDidMount() {
-    console.log(this.props.history);
-  }
-
   render() {
+    console.log(this.props);
     return <h1>Create Profile</h1>;
   }
 }

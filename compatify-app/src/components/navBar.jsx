@@ -2,11 +2,10 @@ import React from "react";
 import { Link, NavLink } from "react-router-dom";
 
 const NavBar = ({ user }) => {
-  console.log("NavBar " + user);
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <Link className="navbar-brand" to="/">
-        Vidly
+        Compatify
       </Link>
       <button
         className="navbar-toggler"
@@ -21,8 +20,8 @@ const NavBar = ({ user }) => {
       </button>
       <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div className="navbar-nav">
-          <NavLink className="nav-item nav-link" to="/movies">
-            Movies
+          <NavLink className="nav-item nav-link" to="/spotify">
+            Spotify
           </NavLink>
           <NavLink className="nav-item nav-link" to="/customers">
             Customers

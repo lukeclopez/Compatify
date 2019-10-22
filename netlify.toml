@@ -1,0 +1,9 @@
+[build]
+  command = "npm run build"
+  publish="compatify-app\build"
+  base = "compatify-app\src\App.js"
+
+  [[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

@@ -3,6 +3,7 @@ import { Route, Redirect, Switch } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import ProtectedRoute from "./components/common/protectedRoute";
 import SpotifyForm from "./components/spotifyForm";
+import CreateProfile from "./components/createProfile";
 import Movies from "./components/movies";
 import MovieForm from "./components/movieForm";
 import Customers from "./components/customers";
@@ -15,6 +16,7 @@ import Logout from "./components/logout";
 import auth from "./services/authService";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
+import CreateProfile from "./components/createProfile";
 
 class App extends Component {
   state = {};
@@ -35,7 +37,8 @@ class App extends Component {
             <Route path="/register" component={RegisterForm} />
             <Route path="/login" component={LoginForm} />
             <ProtectedRoute path="/movies/:id" component={MovieForm} />
-            <Route path="/spotify" component={SpotifyForm} />} />
+            <Route path="/spotify" component={SpotifyForm} />
+            <Route path="/create-profile" component={CreateProfile} />
             <Route path="/customers" component={Customers} />
             <Route path="/rentals" component={Rentals} />
             <Route path="/logout" component={Logout} />

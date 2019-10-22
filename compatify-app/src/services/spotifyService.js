@@ -7,6 +7,12 @@ export function authorizeSpotifyAccountAccess(userId) {
   return http.get(apiUrl + `/auth/?user_id=${userId}`);
 }
 
+export function createProfile(userId, authUrl) {
+  return http.get(
+    apiUrl + `/generate_profile/?user_id=${userId}&url=${authUrl}`
+  );
+}
+
 function movieUrl(id) {
   return `${apiEndpoint}/${id}`;
 }

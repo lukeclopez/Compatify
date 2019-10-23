@@ -4,6 +4,7 @@ import { ToastContainer } from "react-toastify";
 import ProtectedRoute from "./components/common/protectedRoute";
 import SpotifyForm from "./components/spotifyForm";
 import CreateProfile from "./components/createProfile";
+import DisplayProfile from "./components/displayProfile";
 import Movies from "./components/movies";
 import MovieForm from "./components/movieForm";
 import Customers from "./components/customers";
@@ -38,6 +39,7 @@ class App extends Component {
             <ProtectedRoute path="/movies/:id" component={MovieForm} />
             <Route path="/spotify" component={SpotifyForm} />
             <Route path="/create-profile" component={CreateProfile} />
+            <Route path="/display-profile" component={DisplayProfile} />
             <Route path="/customers" component={Customers} />
             <Route path="/rentals" component={Rentals} />
             <Route path="/logout" component={Logout} />

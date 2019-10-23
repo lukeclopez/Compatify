@@ -36,13 +36,11 @@ class App extends Component {
           <Switch>
             <Route path="/register" component={RegisterForm} />
             <Route path="/login" component={LoginForm} />
+            <Route path="/logout" component={Logout} />
             <ProtectedRoute path="/movies/:id" component={MovieForm} />
             <Route path="/spotify" component={SpotifyForm} />
             <Route path="/create-profile" component={CreateProfile} />
             <Route path="/display-profile" component={DisplayProfile} />
-            <Route path="/customers" component={Customers} />
-            <Route path="/rentals" component={Rentals} />
-            <Route path="/logout" component={Logout} />
             <Route path="/not-found" component={NotFound} />
             <Redirect from="/" exact to="/spotify" />
             <Redirect to="/not-found" />

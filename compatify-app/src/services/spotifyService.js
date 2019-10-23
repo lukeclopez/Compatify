@@ -15,10 +15,8 @@ export async function authorizeSpotifyAccountAccess(userId) {
   return authUrl;
 }
 
-export function createProfile(userId, authUrl) {
-  return http.get(
-    apiUrl + `/generate_profile/?user_id=${userId}&url=${authUrl}`
-  );
+export function createProfile(userId, url) {
+  return http.get(apiUrl + `/generate_profile/?user_id=${userId}&url=${url}`);
 }
 
 export function getAuthUrl() {

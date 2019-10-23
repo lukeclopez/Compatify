@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import sptfy from "../services/spotifyService";
+import fakeSptfy from "../services/fakeSpotifyService";
 
 class CreateProfile extends Component {
   state = {};
@@ -11,8 +12,8 @@ class CreateProfile extends Component {
     this.createProfile(userId, currentUrl);
   }
 
-  createProfile = async (userId, authUrl) => {
-    const response = await sptfy.createProfile(userId, authUrl);
+  createProfile = async (userId, currentUrl) => {
+    const response = await fakeSptfy.fakeGenerateProfile(userId, currentUrl);
     console.log(response);
   };
 

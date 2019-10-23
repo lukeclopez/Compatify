@@ -19,6 +19,10 @@ export function createProfile(userId, url) {
   return http.get(apiUrl + `/generate_profile/?user_id=${userId}&url=${url}`);
 }
 
+export function getProfile(userId) {
+  return http.get(apiUrl + `/get_profile/?user_id=${userId}`);
+}
+
 export function getAuthUrl() {
   return localStorage.getItem(authUrlKey);
 }
@@ -56,6 +60,7 @@ export function deleteMovie(movieId) {
 export default {
   authorizeSpotifyAccountAccess,
   createProfile,
+  getProfile,
   getUserId,
   getAuthUrl
 };

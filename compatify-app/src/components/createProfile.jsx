@@ -18,21 +18,17 @@ class CreateProfile extends Component {
   }
 
   createProfile = async (userId, currentUrl) => {
-    const response = await fakeSptfy.createProfile(userId, currentUrl);
+    const response = await sptfy.createProfile(userId, currentUrl);
     this.setState({ data: response.data, loading: false });
   };
 
   render() {
-    const user = sptfy.getUserId();
-    const { data, loading } = this.state;
+    const userId = sptfy.getUserId();
+    const { loading } = this.state;
 
-    if (loading) return <Loader message={"Creating profile for " + user} />;
+    if (loading) return <Loader message={"Creating profile for " + userId} />;
 
-    const redirectInfo = {
-      pathname: "/display-profile",
-      state: { data: data.data }
-    };
-    return <Redirect to={redirectInfo} />;
+    return <Redirect to={`/${userId}`} />;
   }
 }
 

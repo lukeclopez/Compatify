@@ -37,7 +37,7 @@ class App extends Component {
             <ProtectedRoute path="/movies/:id" component={MovieForm} />
             <Route path="/spotify" component={SpotifyForm} />
             <Route path="/create-profile" component={CreateProfile} />
-            <Route path="/display-profile" component={DisplayProfile} />
+            <Route path="/:userId" component={DisplayProfile} />
             <Route path="/not-found" component={NotFound} />
             <Redirect from="/" exact to="/spotify" />
             <Redirect to="/not-found" />

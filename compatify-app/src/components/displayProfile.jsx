@@ -1,9 +1,32 @@
 import React, { Component } from "react";
+import sptfy from "../services/spotifyService";
+import Loader from "./common/loader";
 
 class DisplayProfile extends Component {
-  state = {};
+  state = { data: {}, loading: true, error: false };
+
+  componentDidMount() {
+    this.getProfileData(this.props.match.params.userId);
+  }
+
+  getProfileData = async userId => {
+    try {
+      const data = await sptfy.getProfile(userId);
+      this.setState({ data: data.data, loading: false });
+    } catch (ex) {
+      if (ex.response && ex.response.status === 404) console.log("x");
+      this.setState({ loading: false, error: true });
+    }
+  };
+
   render() {
-    const { data } = this.props.location.state;
+    const { data, loading, error } = this.state;
+    const { userId } = this.props.match.params;
+
+    if (loading) return <Loader message={"Getting profile for " + userId} />;
+
+    if (error) return <>We couldn't find that user... sorry!</>;
+
     return (
       <>
         <h1>{data.user_id}'s Profile</h1>

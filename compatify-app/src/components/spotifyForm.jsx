@@ -1,7 +1,6 @@
 import React from "react";
 import Joi from "joi-browser";
 import Form from "./common/form";
-import { getMovie, saveMovie } from "../services/movieService";
 import sptfy from "../services/spotifyService";
 
 class SpotifyForm extends Form {

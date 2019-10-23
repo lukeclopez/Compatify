@@ -2,15 +2,31 @@ import http from "./httpService";
 import { apiUrl } from "../config.json";
 
 const apiEndpoint = apiUrl;
+const authUrlKey = "authUrl";
+const userIdKey = "userId";
 
-export function authorizeSpotifyAccountAccess(userId) {
-  return http.get(apiUrl + `/auth/?user_id=${userId}`);
+export async function authorizeSpotifyAccountAccess(userId) {
+  const response = await http.get(apiUrl + `/auth/?user_id=${userId}`);
+  const authUrl = response.data.auth_url;
+
+  localStorage.setItem(authUrlKey, authUrl);
+  localStorage.setItem(userIdKey, userId);
+
+  return authUrl;
 }
 
 export function createProfile(userId, authUrl) {
   return http.get(
     apiUrl + `/generate_profile/?user_id=${userId}&url=${authUrl}`
   );
+}
+
+export function getAuthUrl() {
+  return localStorage.getItem(authUrlKey);
+}
+
+export function getUserId() {
+  return localStorage.getItem(userIdKey);
 }
 
 function movieUrl(id) {
@@ -40,5 +56,8 @@ export function deleteMovie(movieId) {
 }
 
 export default {
-  authorizeSpotifyAccountAccess
+  authorizeSpotifyAccountAccess,
+  createProfile,
+  getUserId,
+  getAuthUrl
 };

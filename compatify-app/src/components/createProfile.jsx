@@ -4,9 +4,22 @@ import sptfy from "../services/spotifyService";
 class CreateProfile extends Component {
   state = {};
 
+  componentDidMount() {
+    const userId = sptfy.getUserId();
+    const currentUrl = window.location;
+
+    this.createProfile(userId, currentUrl);
+  }
+
+  createProfile = async (userId, authUrl) => {
+    const response = await sptfy.createProfile(userId, authUrl);
+    console.log(response);
+  };
+
   render() {
-    console.log(this.props);
-    return <h1>Create Profile</h1>;
+    const user = sptfy.getUserId();
+
+    return <h1>Creating Profile for {user}...</h1>;
   }
 }
 

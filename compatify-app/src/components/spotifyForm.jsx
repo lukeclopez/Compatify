@@ -27,12 +27,10 @@ class SpotifyForm extends Form {
   }
 
   doSubmit = async () => {
-    const response = await sptfy.authorizeSpotifyAccountAccess(
-      this.state.data.userId
-    );
-    const authUrl = response.data.auth_url;
+    await sptfy.authorizeSpotifyAccountAccess(this.state.data.userId);
 
-    window.location = authUrl;
+    window.location = sptfy.getAuthUrl();
+
     // this.props.history.push("/movies");
   };
 

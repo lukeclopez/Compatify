@@ -1,11 +1,13 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
+import Loader from "./common/loader";
 import sptfy from "../services/spotifyService";
 import fakeSptfy from "../services/fakeSpotifyService";
 
 class CreateProfile extends Component {
   state = {
-    data: ""
+    data: {},
+    loading: true
   };
 
   componentDidMount() {
@@ -16,28 +18,21 @@ class CreateProfile extends Component {
   }
 
   createProfile = async (userId, currentUrl) => {
-    const response = await fakeSptfy.fakeGenerateProfile(userId, currentUrl);
-    this.setState({ data: response });
+    const response = await fakeSptfy.createProfile(userId, currentUrl);
+    this.setState({ data: response.data, loading: false });
   };
 
   render() {
     const user = sptfy.getUserId();
-    const { data } = this.state;
+    const { data, loading } = this.state;
 
-    return (
-      <>
-        {data ? (
-          <Redirect
-            to={{
-              pathname: "/display-profile",
-              state: { data }
-            }}
-          />
-        ) : (
-          <h1>Creating Profile for {user}...</h1>
-        )}
-      </>
-    );
+    if (loading) return <Loader message={"Creating profile for " + user} />;
+
+    const redirectInfo = {
+      pathname: "/display-profile",
+      state: { data: data.data }
+    };
+    return <Redirect to={redirectInfo} />;
   }
 }
 

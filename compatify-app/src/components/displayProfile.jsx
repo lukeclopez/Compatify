@@ -24,10 +24,10 @@ class DisplayProfile extends Component {
           {data.artists_tree.map((a, index) => {
             return (
               <li key={index}>
-                {a.name}{" "}
+                {a.name}
                 <ul>
-                  {a.genres.map(g => (
-                    <li>{g}</li>
+                  {a.genres.map((g, index) => (
+                    <li key={index}>{g}</li>
                   ))}
                 </ul>
               </li>

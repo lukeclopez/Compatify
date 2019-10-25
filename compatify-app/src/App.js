@@ -5,6 +5,7 @@ import ProtectedRoute from "./components/common/protectedRoute";
 import SpotifyForm from "./components/spotifyForm";
 import CreateProfile from "./components/createProfile";
 import DisplayProfile from "./components/displayProfile";
+import DisplayGraphs from "./components/displayGraphs";
 import MovieForm from "./components/movieForm";
 import NotFound from "./components/notFound";
 import NavBar from "./components/navBar";
@@ -25,6 +26,7 @@ class App extends Component {
 
   render() {
     const { user } = this.state;
+
     return (
       <React.Fragment>
         <ToastContainer />
@@ -37,8 +39,9 @@ class App extends Component {
             <ProtectedRoute path="/movies/:id" component={MovieForm} />
             <Route path="/spotify" component={SpotifyForm} />
             <Route path="/create-profile" component={CreateProfile} />
-            <Route path="/:userId" component={DisplayProfile} />
+            <Route path="/graphs" component={DisplayGraphs} />
             <Route path="/not-found" component={NotFound} />
+            <Route path="/profile/:userId" component={DisplayProfile} />
             <Redirect from="/" exact to="/spotify" />
             <Redirect to="/not-found" />
           </Switch>

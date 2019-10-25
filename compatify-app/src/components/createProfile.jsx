@@ -28,7 +28,7 @@ class CreateProfile extends Component {
 
     if (loading) return <Loader message={"Creating profile for " + userId} />;
 
-    return <Redirect to={`/${userId}`} />;
+    return <Redirect to={`profile/${userId}`} />;
   }
 }
 

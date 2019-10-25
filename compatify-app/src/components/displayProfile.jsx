@@ -36,10 +36,19 @@ class DisplayProfile extends Component {
         <span>{data.avg_track_length}</span>
         <h4>Average Track Popularity</h4>
         <span>{data.avg_track_popularity}</span>
+        <h4>Average Track Instrumentalness</h4>
+        <span>{data.avg_track_instru}</span>
+        <h4>Genres</h4>
+        {data.genres &&
+          data.genres.map((g, index) => {
+            return <li key={index}>{g}</li>;
+          })}
+        <h4>Genre Distribution</h4>
+        <span>{data.genre_dist}</span>
         <h4>Artists</h4>
         <ul>
           {data.primary_artists.map((a, index) => {
-            return <li key={index}>{a[0].name}</li>;
+            return <li key={index}>{a.name}</li>;
           })}
         </ul>
         <h4>Related Artists</h4>

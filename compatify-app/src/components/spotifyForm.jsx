@@ -1,7 +1,6 @@
 import React from "react";
 import Joi from "joi-browser";
 import Form from "./common/form";
-import NormalDistribution from "./graphs/normalDistribution";
 import sptfy from "../services/spotifyService";
 
 class SpotifyForm extends Form {
@@ -28,10 +27,7 @@ class SpotifyForm extends Form {
 
   doSubmit = async () => {
     await sptfy.authorizeSpotifyAccountAccess(this.state.data.userId);
-
     window.location = sptfy.getAuthUrl();
-
-    // this.props.history.push("/movies");
   };
 
   render() {

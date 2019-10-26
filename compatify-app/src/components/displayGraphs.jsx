@@ -1,12 +1,10 @@
 import React from "react";
-import RadarChartCompat from "./graphs/radarChartCompat";
-import NormalDistribution from "./graphs/normalDistribution";
+import CustomShapeBar from "./graphs/customShapeBar";
 
 const DisplayGraphs = () => {
   return (
     <>
-      <NormalDistribution />
-      <RadarChartCompat />
+      <CustomShapeBar />
     </>
   );
 };

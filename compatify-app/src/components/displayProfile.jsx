@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import sptfy from "../services/spotifyService";
 import Loader from "./common/loader";
+import RadarChartCompat from "./graphs/radarChartCompat";
+import CustomShapeBar from "./graphs/customShapeBar";
 
 class DisplayProfile extends Component {
   state = { data: {}, loading: true, error: false };
@@ -30,19 +32,20 @@ class DisplayProfile extends Component {
     return (
       <>
         <h1>{data.user_id}'s Profile</h1>
+        <RadarChartCompat
+          name={data.user_id}
+          energy={data.avg_track_energy}
+          valence={data.avg_track_valence}
+          popularity={data.avg_track_popularity}
+          instrumentalness={data.avg_track_instru}
+        />
+        <CustomShapeBar reach={data.genre_dist} />
         <h4>Average Track Age</h4>
         <span>{data.avg_track_age}</span>
-        <h4>Average Track Length</h4>
-        <span>{data.avg_track_length}</span>
-        <h4>Average Track Popularity</h4>
-        <span>{data.avg_track_popularity}</span>
-        <h4>Average Track Instrumentalness</h4>
-        <span>{data.avg_track_instru}</span>
         <h4>Genres</h4>
-        {data.genres &&
-          data.genres.map((g, index) => {
-            return <li key={index}>{g}</li>;
-          })}
+        {data.genres.map((g, index) => {
+          return <li key={index}>{g}</li>;
+        })}
         <h4>Genre Distribution</h4>
         <span>{data.genre_dist}</span>
         <h4>Artists</h4>

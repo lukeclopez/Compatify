@@ -23,8 +23,8 @@ const NavBar = ({ user }) => {
           <NavLink className="nav-item nav-link" to="/spotify">
             Spotify
           </NavLink>
-          <NavLink className="nav-item nav-link" to="/graphs">
-            Graphs
+          <NavLink className="nav-item nav-link" to={`profile/${user}`}>
+            My Profile
           </NavLink>
           {!user && (
             <React.Fragment>

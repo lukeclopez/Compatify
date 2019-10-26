@@ -18,7 +18,7 @@ class RadarChartCompat extends Component {
       valence,
       popularity,
       instrumentalness,
-      reach
+      range
     } = this.props;
     const data = [
       {
@@ -39,6 +39,11 @@ class RadarChartCompat extends Component {
       {
         trait: "Energy",
         A: energy,
+        fullMark: 1
+      },
+      {
+        trait: "Range",
+        A: range,
         fullMark: 1
       }
     ];

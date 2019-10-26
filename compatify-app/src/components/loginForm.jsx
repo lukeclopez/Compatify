@@ -3,26 +3,24 @@ import { Redirect } from "react-router-dom";
 import Joi from "joi-browser";
 import Form from "./common/form";
 import auth from "../services/authService";
+import sptfy from "../services/spotifyService";
 
 class LoginForm extends Form {
   state = {
-    data: { username: "", password: "" },
+    data: { username: "" },
     errors: {}
   };
 
   schema = {
     username: Joi.string()
       .required()
-      .label("Username"),
-    password: Joi.string()
-      .required()
-      .label("Password")
+      .label("Username")
   };
 
   doSubmit = async () => {
     try {
       const { data } = this.state;
-      await auth.login(data.username, data.password);
+      const response = await sptfy.authorizeSpotifyAccountAccess(data.username);
 
       const { state } = this.props.location;
       window.location = state ? state.from.pathname : "/";
@@ -42,7 +40,6 @@ class LoginForm extends Form {
         <h1>Login</h1>
         <form onSubmit={this.handleSubmit}>
           {this.renderInput("username", "Username")}
-          {this.renderInput("password", "Password", "password")}
           {this.renderButton("Login")}
         </form>
       </div>

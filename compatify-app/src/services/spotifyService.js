@@ -31,6 +31,8 @@ export function getUserId() {
   return localStorage.getItem(userIdKey);
 }
 
+export function getCurrentSpotifyUser() {}
+
 function movieUrl(id) {
   return `${apiEndpoint}/${id}`;
 }

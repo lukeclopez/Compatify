@@ -10,26 +10,28 @@ class LoggedIn extends Component {
     const userId = sptfy.getUserId();
     const currentUrl = window.location;
 
-    sptfy.saveSpotifyCodeUrl(currentUrl);
-
     this.getProfileData(userId);
+    this.saveRefreshToken(currentUrl);
   }
 
   getProfileData = async userId => {
-    // TESTING
-    const cU = await sptfy.getCurrentSpotifyUser();
-    console.log(cU);
     try {
       const data = await sptfy.getProfile(userId);
       this.setState({ data: data.data, loading: false });
     } catch (ex) {
-      if (ex.response && ex.response.status === 404) console.log("x");
+      if (ex.response && ex.response.status === 404)
+        console.log("This user does not have a profile yet.");
       this.setState({ loading: false, profileExists: false });
     }
   };
 
+  saveRefreshToken = async currentUrl => {
+    const tokenInfo = await sptfy.getToken(currentUrl);
+    sptfy.saveRefreshToken(tokenInfo.data.refresh_token);
+  };
+
   render() {
-    const { data, loading, profileExists } = this.state;
+    const { loading, profileExists } = this.state;
     const { userId } = this.props.match.params;
 
     if (loading)
@@ -37,8 +39,8 @@ class LoggedIn extends Component {
         <Loader message={"Checking whether profile exists for " + userId} />
       );
 
-    //if (profileExists) return <Redirect to="/display-profile" />;
-    //if (!profileExists) return <Redirect to="/create-profile" />;
+    if (profileExists) return <Redirect to="/profile" />;
+    if (!profileExists) return <Redirect to="/create-profile" />;
 
     return <></>;
   }

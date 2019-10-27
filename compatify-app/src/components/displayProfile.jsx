@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import sptfy from "../services/spotifyService";
 import Loader from "./common/loader";
 import RadarChartCompat from "./graphs/radarChartCompat";
@@ -7,12 +8,15 @@ class DisplayProfile extends Component {
   state = { data: {}, loading: true, error: false };
 
   componentDidMount() {
-    this.getProfileData(this.props.match.params.userId);
+    this.getProfileData();
   }
 
-  getProfileData = async userId => {
+  getProfileData = async () => {
     try {
-      const data = await sptfy.getProfile(userId);
+      const refreshToken = sptfy.getRefreshToken();
+      const currentUser = await sptfy.getCurrentSpotifyUser(refreshToken);
+      const data = await sptfy.getProfile(currentUser.data.id);
+
       this.setState({ data: data.data, loading: false });
     } catch (ex) {
       if (ex.response && ex.response.status === 404) console.log("x");
@@ -22,15 +26,17 @@ class DisplayProfile extends Component {
 
   render() {
     const { data, loading, error } = this.state;
-    const { userId } = this.props.match.params;
 
-    if (loading) return <Loader message={"Getting profile for " + userId} />;
+    if (loading) return <Loader message={"Getting profile..."} />;
 
     if (error) return <>We couldn't find that user... sorry!</>;
 
     return (
       <>
         <h1>{data.user_id}'s Profile</h1>
+        <Link to="/create-profile">
+          <button className="btn btn-primary">Update Profile</button>
+        </Link>
         <RadarChartCompat
           name={data.user_id}
           valence={data.avg_track_valence}

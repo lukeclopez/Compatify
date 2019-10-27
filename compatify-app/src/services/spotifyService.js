@@ -5,6 +5,7 @@ const apiEndpoint = apiUrl;
 const authUrlKey = "authUrl";
 const userIdKey = "userId";
 const spotifyCodeUrlKey = "spotifyCodeUrl";
+const refreshTokenKey = "refreshToken";
 
 export async function authorizeSpotifyAccountAccess(userId) {
   const response = await http.get(apiUrl + `/auth/?user_id=${userId}`);
@@ -20,17 +21,27 @@ export function saveSpotifyCodeUrl(codeUrl) {
   localStorage.setItem(spotifyCodeUrlKey, codeUrl);
 }
 
-export function createProfile(userId, url) {
-  return http.get(apiUrl + `/generate_profile/?user_id=${userId}&url=${url}`);
+export function saveRefreshToken(refreshToken) {
+  localStorage.setItem(refreshTokenKey, refreshToken);
+}
+
+export function getRefreshToken() {
+  return localStorage.getItem(refreshTokenKey);
+}
+
+export function createProfile(userId, refreshToken) {
+  return http.get(
+    apiUrl +
+      `/generate_profile/?user_id=${userId}&refresh_token=${refreshToken}`
+  );
 }
 
 export function getProfile(userId) {
   return http.get(apiUrl + `/get_profile/?user_id=${userId}`);
 }
 
-export function parseCodeFromSearch(search) {
-  const code = search.replace("?code=", "");
-  return code;
+export function getToken(url) {
+  return http.get(apiUrl + `/auth_get_token/?url=${url}`);
 }
 
 export function getCode() {
@@ -45,10 +56,11 @@ export function getUserId() {
   return localStorage.getItem(userIdKey);
 }
 
-export function getCurrentSpotifyUser() {
-  const token = getCode();
-  console.log(token);
-  return http.post(apiUrl + "/get_current_user/", `url=${token}`);
+export function getCurrentSpotifyUser(refreshToken) {
+  return http.post(
+    apiUrl + "/get_current_user/",
+    `refresh_token=${refreshToken}`
+  );
 }
 
 function movieUrl(id) {
@@ -80,7 +92,9 @@ export function deleteMovie(movieId) {
 export default {
   authorizeSpotifyAccountAccess,
   getCurrentSpotifyUser,
-  parseCodeFromSearch,
+  saveRefreshToken,
+  getRefreshToken,
+  getToken,
   saveSpotifyCodeUrl,
   createProfile,
   getProfile,

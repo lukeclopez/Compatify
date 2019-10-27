@@ -23,7 +23,7 @@ const NavBar = ({ user }) => {
           <NavLink className="nav-item nav-link" to="/spotify">
             Spotify
           </NavLink>
-          <NavLink className="nav-item nav-link" to={`profile/${user}`}>
+          <NavLink className="nav-item nav-link" to="/profile">
             My Profile
           </NavLink>
           {!user && (

@@ -13,8 +13,9 @@ class CreateProfile extends Component {
   componentDidMount() {
     const userId = sptfy.getUserId();
     const currentUrl = window.location;
+    const refreshToken = sptfy.getRefreshToken();
 
-    this.createProfile(userId, currentUrl);
+    this.createProfile(userId, refreshToken);
   }
 
   createProfile = async (userId, currentUrl) => {

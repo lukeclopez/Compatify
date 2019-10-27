@@ -41,7 +41,7 @@ class App extends Component {
             <Route path="/create-profile" component={CreateProfile} />
             <Route path="/logged-in" component={LoggedIn} />
             <Route path="/not-found" component={NotFound} />
-            <Route path="/profile/:userId" component={DisplayProfile} />
+            <Route path="/profile" component={DisplayProfile} />
             <Redirect from="/" exact to="/spotify" />
             <Redirect to="/not-found" />
           </Switch>

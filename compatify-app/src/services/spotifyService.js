@@ -7,12 +7,9 @@ const userIdKey = "userId";
 const spotifyCodeUrlKey = "spotifyCodeUrl";
 const refreshTokenKey = "refreshToken";
 
-export async function authorizeSpotifyAccountAccess(userId) {
-  const response = await http.get(apiUrl + `/auth/?user_id=${userId}`);
+export async function authorizeSpotifyAccountAccess() {
+  const response = await http.get(apiUrl + "/auth");
   const authUrl = response.data.auth_url;
-
-  localStorage.setItem(authUrlKey, authUrl);
-  localStorage.setItem(userIdKey, userId);
 
   return authUrl;
 }
@@ -27,6 +24,10 @@ export function saveRefreshToken(refreshToken) {
 
 export function getRefreshToken() {
   return localStorage.getItem(refreshTokenKey);
+}
+
+export function removeRefreshToken() {
+  return localStorage.removeItem(refreshTokenKey);
 }
 
 export function createProfile(userId, refreshToken) {
@@ -57,6 +58,8 @@ export function getUserId() {
 }
 
 export function getCurrentSpotifyUser(refreshToken) {
+  if (!refreshToken) return null;
+
   return http.post(
     apiUrl + "/get_current_user/",
     `refresh_token=${refreshToken}`
@@ -92,10 +95,11 @@ export function deleteMovie(movieId) {
 export default {
   authorizeSpotifyAccountAccess,
   getCurrentSpotifyUser,
+  removeRefreshToken,
+  saveSpotifyCodeUrl,
   saveRefreshToken,
   getRefreshToken,
   getToken,
-  saveSpotifyCodeUrl,
   createProfile,
   getProfile,
   getUserId,

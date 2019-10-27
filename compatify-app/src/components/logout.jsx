@@ -1,9 +1,9 @@
 import { Component } from "react";
-import auth from "../services/authService";
+import sptfy from "../services/spotifyService";
 
 class Logout extends Component {
   componentDidMount() {
-    auth.logout();
+    sptfy.removeRefreshToken();
     window.location = "/";
   }
 

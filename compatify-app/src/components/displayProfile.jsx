@@ -5,31 +5,35 @@ import Loader from "./common/loader";
 import RadarChartCompat from "./graphs/radarChartCompat";
 
 class DisplayProfile extends Component {
-  state = { data: {}, loading: true, error: false };
+  state = { data: {}, loading: true, error: "" };
 
   componentDidMount() {
     this.getProfileData();
   }
 
   getProfileData = async () => {
+    const refreshToken = sptfy.getRefreshToken();
+    if (!refreshToken) {
+      this.props.history.push("/login");
+      return null;
+    }
+    const currentUser = await sptfy.getCurrentSpotifyUser(refreshToken);
     try {
-      const refreshToken = sptfy.getRefreshToken();
-      const currentUser = await sptfy.getCurrentSpotifyUser(refreshToken);
       const data = await sptfy.getProfile(currentUser.data.id);
-
       this.setState({ data: data.data, loading: false });
     } catch (ex) {
-      if (ex.response && ex.response.status === 404) console.log("x");
-      this.setState({ loading: false, error: true });
+      if (ex.response && ex.response.status === 404) {
+        this.setState({ loading: false, error: "Could not find profile!" });
+      }
     }
   };
 
   render() {
     const { data, loading, error } = this.state;
 
-    if (loading) return <Loader message={"Getting profile..."} />;
+    if (loading) return <Loader message={"Getting profile"} />;
 
-    if (error) return <>We couldn't find that user... sorry!</>;
+    if (error) return <>{error}</>;
 
     return (
       <>

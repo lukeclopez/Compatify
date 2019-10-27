@@ -1,17 +1,13 @@
 import React, { Component } from "react";
 import { Route, Redirect, Switch } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
-import ProtectedRoute from "./components/common/protectedRoute";
 import LogInWithSpotify from "./components/Homepage";
 import CreateProfile from "./components/createProfile";
 import DisplayProfile from "./components/displayProfile";
 import LoggedIn from "./components/loggedIn";
-import MovieForm from "./components/movieForm";
 import NotFound from "./components/notFound";
 import NavBar from "./components/navBar";
-import RegisterForm from "./components/registerForm";
 import Logout from "./components/logout";
-import sptfy from "./services/spotifyService";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 

@@ -4,6 +4,7 @@ import { apiUrl } from "../config.json";
 const apiEndpoint = apiUrl;
 const authUrlKey = "authUrl";
 const userIdKey = "userId";
+const spotifyCodeUrlKey = "spotifyCodeUrl";
 
 export async function authorizeSpotifyAccountAccess(userId) {
   const response = await http.get(apiUrl + `/auth/?user_id=${userId}`);
@@ -15,12 +16,25 @@ export async function authorizeSpotifyAccountAccess(userId) {
   return authUrl;
 }
 
+export function saveSpotifyCodeUrl(codeUrl) {
+  localStorage.setItem(spotifyCodeUrlKey, codeUrl);
+}
+
 export function createProfile(userId, url) {
   return http.get(apiUrl + `/generate_profile/?user_id=${userId}&url=${url}`);
 }
 
 export function getProfile(userId) {
   return http.get(apiUrl + `/get_profile/?user_id=${userId}`);
+}
+
+export function parseCodeFromSearch(search) {
+  const code = search.replace("?code=", "");
+  return code;
+}
+
+export function getCode() {
+  return localStorage.getItem(spotifyCodeUrlKey);
 }
 
 export function getAuthUrl() {
@@ -31,7 +45,11 @@ export function getUserId() {
   return localStorage.getItem(userIdKey);
 }
 
-export function getCurrentSpotifyUser() {}
+export function getCurrentSpotifyUser() {
+  const token = getCode();
+  console.log(token);
+  return http.post(apiUrl + "/get_current_user/", `url=${token}`);
+}
 
 function movieUrl(id) {
   return `${apiEndpoint}/${id}`;
@@ -61,6 +79,9 @@ export function deleteMovie(movieId) {
 
 export default {
   authorizeSpotifyAccountAccess,
+  getCurrentSpotifyUser,
+  parseCodeFromSearch,
+  saveSpotifyCodeUrl,
   createProfile,
   getProfile,
   getUserId,

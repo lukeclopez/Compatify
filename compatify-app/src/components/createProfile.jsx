@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
 import Loader from "./common/loader";
 import sptfy from "../services/spotifyService";
-import fakeSptfy from "../services/fakeSpotifyService";
 
 class CreateProfile extends Component {
   state = {

@@ -1,9 +1,8 @@
 import http from "./httpService";
 import { apiUrl } from "../config.json";
 
-const apiEndpoint = apiUrl;
 const authUrlKey = "authUrl";
-const userIdKey = "userId";
+const userIdKey = "spotifyUserId";
 const spotifyCodeUrlKey = "spotifyCodeUrl";
 const refreshTokenKey = "refreshToken";
 
@@ -14,8 +13,12 @@ export async function authorizeSpotifyAccountAccess() {
   return authUrl;
 }
 
-export function saveSpotifyCodeUrl(codeUrl) {
-  localStorage.setItem(spotifyCodeUrlKey, codeUrl);
+export function saveSpotifyUserId(UserId) {
+  localStorage.setItem(userIdKey, UserId);
+}
+
+export function getSpotifyUserId() {
+  return localStorage.getItem(userIdKey);
 }
 
 export function saveRefreshToken(refreshToken) {
@@ -61,13 +64,15 @@ export function getUserId() {
   return localStorage.getItem(userIdKey);
 }
 
-export function getCurrentSpotifyUser(refreshToken) {
+export async function getCurrentSpotifyUser(refreshToken) {
   if (!refreshToken) return null;
 
-  return http.post(
-    apiUrl + "/get_current_user/",
-    `refresh_token=${refreshToken}`
-  );
+  const payload = `refresh_token=${refreshToken}`;
+  const currentUser = await http.post(apiUrl + "/get_current_user/", payload);
+  console.log(currentUser);
+  saveSpotifyUserId(currentUser.data.id);
+
+  return currentUser;
 }
 
 export function getShareUrl(userId) {
@@ -88,7 +93,8 @@ export default {
   authorizeSpotifyAccountAccess,
   getCurrentSpotifyUser,
   removeRefreshToken,
-  saveSpotifyCodeUrl,
+  saveSpotifyUserId,
+  getSpotifyUserId,
   saveRefreshToken,
   getSharedProfile,
   getRefreshToken,

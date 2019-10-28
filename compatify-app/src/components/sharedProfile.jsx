@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import sptfy from "../services/spotifyService";
 import Loader from "./common/loader";
 import RadarChartCompat from "./graphs/radarChartCompat";
-import ShareUrl from "./shareUrl";
 
 class SharedProfile extends Component {
   state = { data: {}, loading: true, error: "" };
@@ -14,7 +13,6 @@ class SharedProfile extends Component {
 
   getSharedProfileData = async () => {
     const code = this.props.match.params.shareCode;
-    console.log(code);
     try {
       const data = await sptfy.getSharedProfile(code);
       this.setState({ data: data.data, loading: false });
@@ -35,6 +33,7 @@ class SharedProfile extends Component {
       avg_track_energy,
       range
     } = data;
+    const currentUser = sptfy.getSpotifyUserId();
 
     if (loading) return <Loader message={"Getting profile"} />;
 
@@ -43,6 +42,8 @@ class SharedProfile extends Component {
     return (
       <>
         <h1>{user_id}</h1>
+        {user_id === currentUser &&
+          "This is what others will see when they use your share URL."}
         <RadarChartCompat
           name={user_id}
           valence={avg_track_valence}

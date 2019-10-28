@@ -41,6 +41,10 @@ export function getProfile(userId) {
   return http.get(apiUrl + `/get_profile/?user_id=${userId}`);
 }
 
+export function getSharedProfile(code) {
+  return http.get(apiUrl + `/get_shared_profile/?code=${code}`);
+}
+
 export function getToken(url) {
   return http.get(apiUrl + `/auth_get_token/?url=${url}`);
 }
@@ -86,6 +90,7 @@ export default {
   removeRefreshToken,
   saveSpotifyCodeUrl,
   saveRefreshToken,
+  getSharedProfile,
   getRefreshToken,
   getNewShareUrl,
   getShareUrl,

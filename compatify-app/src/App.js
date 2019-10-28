@@ -4,6 +4,7 @@ import { ToastContainer } from "react-toastify";
 import LogInWithSpotify from "./components/Homepage";
 import CreateProfile from "./components/createProfile";
 import DisplayProfile from "./components/displayProfile";
+import SharedProfile from './components/sharedProfile';
 import LoggedIn from "./components/loggedIn";
 import NotFound from "./components/notFound";
 import NavBar from "./components/navBar";
@@ -25,6 +26,7 @@ class App extends Component {
             <Route path="/logged-in" component={LoggedIn} />
             <Route path="/not-found" component={NotFound} />
             <Route path="/profile" component={DisplayProfile} />
+            <Route path="/p:shareCode" component={SharedProfile} />
             <Redirect from="/" exact to="/login" />
             <Redirect to="/not-found" />
           </Switch>

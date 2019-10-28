@@ -66,11 +66,14 @@ export function getCurrentSpotifyUser(refreshToken) {
   );
 }
 
+export function getShareUrl(userId) {
+  return http.get(apiUrl + `/get_share_url/?user_id=${userId}`);
+}
+
 export async function getNewShareUrl() {
   const refreshToken = getRefreshToken();
   const { data } = await getCurrentSpotifyUser(refreshToken);
-  console.log(data);
-  const newShareUrl = http.post(
+  const newShareUrl = http.get(
     apiUrl + "/new_share_url/",
     `user_id=${data.id}`
   );
@@ -85,6 +88,7 @@ export default {
   saveRefreshToken,
   getRefreshToken,
   getNewShareUrl,
+  getShareUrl,
   createProfile,
   getProfile,
   getUserId,

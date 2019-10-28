@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import sptfy from "../services/spotifyService";
 import Loader from "./common/loader";
 import RadarChartCompat from "./graphs/radarChartCompat";
+import ShareUrl from "./shareUrl";
 
 class DisplayProfile extends Component {
   state = { data: {}, loading: true, error: "" };
@@ -28,12 +29,19 @@ class DisplayProfile extends Component {
     }
   };
 
-  newShareUrl = async () => {
-    return await sptfy.getNewShareUrl();
-  };
-
   render() {
     const { data, loading, error } = this.state;
+    const {
+      user_id,
+      avg_track_valence,
+      avg_track_instru,
+      avg_track_popularity,
+      avg_track_energy,
+      range,
+      genres,
+      artists,
+      share_url
+    } = data;
 
     if (loading) return <Loader message={"Getting profile"} />;
 
@@ -41,33 +49,28 @@ class DisplayProfile extends Component {
 
     return (
       <>
-        <h1>{data.user_id}</h1>
+        <h1>{user_id}</h1>
         <Link to="/create-profile">
           <button className="btn btn-primary">Update Profile</button>
         </Link>
-        <h3>
-          Let others see your profile:
-          {data.share_url && " compatify.io/" + data.share_url}
-        </h3>
-        <button className="btn btn-primary" onClick={this.newShareUrl}>
-          Get a new share URL
-        </button>
+
+        <ShareUrl userId={user_id} shareUrl={share_url} />
 
         <RadarChartCompat
-          name={data.user_id}
-          valence={data.avg_track_valence}
-          instrumentalness={data.avg_track_instru}
-          popularity={data.avg_track_popularity}
-          energy={data.avg_track_energy}
-          range={data.range}
+          name={user_id}
+          valence={avg_track_valence}
+          instrumentalness={avg_track_instru}
+          popularity={avg_track_popularity}
+          energy={avg_track_energy}
+          range={range}
         />
         <h4>Genres</h4>
-        {data.genres.map((g, index) => {
+        {genres.map((g, index) => {
           return <li key={index}>{g}</li>;
         })}
         <h4>Artists</h4>
         <ul>
-          {data.artists.map((a, index) => {
+          {artists.map((a, index) => {
             return <li key={index}>{a.name}</li>;
           })}
         </ul>

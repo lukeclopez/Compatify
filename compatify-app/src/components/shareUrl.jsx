@@ -2,15 +2,16 @@ import React, { Component } from "react";
 import sptfy from "../services/spotifyService";
 
 class ShareUrl extends Component {
-  state = { url: this.props.shareUrl };
+  state = { url: this.props.shareUrl, loading: false };
 
   newShareUrl = async () => {
-    const newUrl = await sptfy.getNewShareUrl();
-    this.setState({ url: newUrl });
+    this.setState({ loading: true });
+    const { data } = await sptfy.getNewShareUrl();
+    this.setState({ url: data.share_url, loading: false });
   };
 
   render() {
-    const { url } = this.state;
+    const { url, loading } = this.state;
 
     return (
       <>
@@ -20,8 +21,12 @@ class ShareUrl extends Component {
           <p>Click the button below to generate a share url.</p>
         )}
 
-        <button className="btn btn-primary" onClick={this.newShareUrl}>
-          Get a new share URL
+        <button
+          className="btn btn-primary"
+          onClick={this.newShareUrl}
+          disabled={loading}
+        >
+          {!loading ? "Get a new share URL" : "Getting new URL..."}
         </button>
       </>
     );

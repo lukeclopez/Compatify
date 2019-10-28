@@ -73,9 +73,9 @@ export function getShareUrl(userId) {
 export async function getNewShareUrl() {
   const refreshToken = getRefreshToken();
   const { data } = await getCurrentSpotifyUser(refreshToken);
+  console.log(data);
   const newShareUrl = http.get(
-    apiUrl + "/new_share_url/",
-    `user_id=${data.id}`
+    apiUrl + "/new_share_url/" + `?user_id=${data.id}`
   );
   return newShareUrl;
 }

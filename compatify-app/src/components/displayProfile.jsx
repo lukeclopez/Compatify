@@ -28,6 +28,10 @@ class DisplayProfile extends Component {
     }
   };
 
+  newShareUrl = async () => {
+    return await sptfy.getNewShareUrl();
+  };
+
   render() {
     const { data, loading, error } = this.state;
 
@@ -37,10 +41,18 @@ class DisplayProfile extends Component {
 
     return (
       <>
-        <h1>{data.user_id}'s Profile</h1>
+        <h1>{data.user_id}</h1>
         <Link to="/create-profile">
           <button className="btn btn-primary">Update Profile</button>
         </Link>
+        <h3>
+          Let others see your profile:
+          {data.share_url && " compatify.io/" + data.share_url}
+        </h3>
+        <button className="btn btn-primary" onClick={this.newShareUrl}>
+          Get a new share URL
+        </button>
+
         <RadarChartCompat
           name={data.user_id}
           valence={data.avg_track_valence}

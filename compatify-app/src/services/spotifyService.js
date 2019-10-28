@@ -66,30 +66,15 @@ export function getCurrentSpotifyUser(refreshToken) {
   );
 }
 
-function movieUrl(id) {
-  return `${apiEndpoint}/${id}`;
-}
-
-export function getMovies() {
-  return http.get(apiEndpoint);
-}
-
-export function getMovie(movieId) {
-  return http.get(movieUrl(movieId));
-}
-
-export function saveMovie(movie) {
-  if (movie._id) {
-    const body = { ...movie };
-    delete body._id;
-    return http.put(movieUrl(movie._id), body);
-  }
-
-  return http.post(apiEndpoint, movie);
-}
-
-export function deleteMovie(movieId) {
-  return http.delete(movieUrl(movieId));
+export async function getNewShareUrl() {
+  const refreshToken = getRefreshToken();
+  const { data } = await getCurrentSpotifyUser(refreshToken);
+  console.log(data);
+  const newShareUrl = http.post(
+    apiUrl + "/new_share_url/",
+    `user_id=${data.id}`
+  );
+  return newShareUrl;
 }
 
 export default {
@@ -99,9 +84,10 @@ export default {
   saveSpotifyCodeUrl,
   saveRefreshToken,
   getRefreshToken,
-  getToken,
+  getNewShareUrl,
   createProfile,
   getProfile,
   getUserId,
-  getAuthUrl
+  getAuthUrl,
+  getToken
 };

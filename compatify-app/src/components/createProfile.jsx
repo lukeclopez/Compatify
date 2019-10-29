@@ -23,10 +23,12 @@ class CreateProfile extends Component {
   };
 
   render() {
+    const shareUrl = sptfy.getShareUrl();
     const userId = sptfy.getUserId();
     const { loading } = this.state;
 
     if (loading) return <Loader message={"Creating profile for " + userId} />;
+    if (shareUrl) return <></>;
 
     return <Redirect to={`profile/${userId}`} />;
   }

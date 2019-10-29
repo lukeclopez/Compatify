@@ -1,0 +1,87 @@
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import sptfy from "../services/spotifyService";
+import Loader from "./common/loader";
+import RadarChartCompat from "./graphs/radarChartCompat";
+import ShareUrl from "./shareUrl";
+
+class DisplayCompatifyReport extends Component {
+  state = { data: {}, loading: true, error: "" };
+
+  componentDidMount() {
+    this.getProfileData();
+  }
+
+  getProfileData = async () => {
+    const refreshToken = sptfy.getRefreshToken();
+    if (!refreshToken) {
+      this.props.history.push("/login");
+      return null;
+    }
+    const currentUser = await sptfy.getCurrentSpotifyUser(refreshToken);
+    const userId = currentUser.data.id;
+    const shareUrl = sptfy.getShareUrl();
+    sptfy.removeShareUrl();
+    try {
+      const data = await sptfy.getCompatibilityReport(userId, shareUrl);
+      this.setState({ data: data.data, loading: false });
+    } catch (ex) {
+      if (ex.response && ex.response.status === 404) {
+        this.setState({ loading: false, error: "Could not find profile!" });
+      }
+    }
+  };
+
+  render() {
+    const { data, loading, error } = this.state;
+    const {
+      user_id,
+      avg_track_valence,
+      avg_track_instru,
+      avg_track_popularity,
+      avg_track_energy,
+      range,
+      genres,
+      artists,
+      share_url
+    } = data;
+
+    if (loading) return <Loader message={"Getting profile"} />;
+
+    if (error) return <>{error}</>;
+
+    return <h1>hi</h1>;
+
+    return (
+      <>
+        <h1>{user_id}</h1>
+        <Link to="/create-profile">
+          <button className="btn btn-primary">Update Profile</button>
+        </Link>
+
+        <ShareUrl userId={user_id} shareUrl={share_url} />
+
+        <RadarChartCompat
+          name={user_id}
+          valence={avg_track_valence}
+          instrumentalness={avg_track_instru}
+          popularity={avg_track_popularity}
+          energy={avg_track_energy}
+          range={range}
+        />
+        <h4>Genres</h4>
+        {genres.map((g, index) => {
+          return <li key={index}>{g}</li>;
+        })}
+        <h4>Artists</h4>
+        <ul>
+          {artists.map((a, index) => {
+            return <li key={index}>{a.name}</li>;
+          })}
+        </ul>
+      </>
+    );
+  }
+}
+
+export default DisplayCompatifyReport;

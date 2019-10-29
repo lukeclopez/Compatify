@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import sptfy from "../services/spotifyService";
 import Loader from "./common/loader";
+import LogInWithSpotify from "./logInWithSpotify";
 import RadarChartCompat from "./graphs/radarChartCompat";
 
 class SharedProfile extends Component {
@@ -31,7 +32,8 @@ class SharedProfile extends Component {
       avg_track_instru,
       avg_track_popularity,
       avg_track_energy,
-      range
+      range,
+      share_url
     } = data;
     const currentUser = sptfy.getSpotifyUserId();
 
@@ -52,6 +54,8 @@ class SharedProfile extends Component {
           energy={avg_track_energy}
           range={range}
         />
+        <p>Are we musically compatible? Log in with Spotify to find out!</p>
+        <LogInWithSpotify compatifyShareUrl={share_url} />
       </>
     );
   }

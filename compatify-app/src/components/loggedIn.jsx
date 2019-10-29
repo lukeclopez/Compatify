@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
 import sptfy from "../services/spotifyService";
 import Loader from "./common/loader";
+import DisplayCompatifyReport from "./displayCompatifyReport";
 
 class LoggedIn extends Component {
   state = { data: {}, loading: true, profileExists: true };
@@ -33,12 +34,15 @@ class LoggedIn extends Component {
   render() {
     const { loading, profileExists } = this.state;
     const { userId } = this.props.match.params;
+    const shareUrl = sptfy.getShareUrl();
 
-    if (loading)
+    if (loading) {
       return (
         <Loader message={"Checking whether profile exists for " + userId} />
       );
+    }
 
+    if (shareUrl && profileExists) return <Redirect to="/compatify" />;
     if (profileExists) return <Redirect to="/profile" />;
     if (!profileExists) return <Redirect to="/create-profile" />;
 

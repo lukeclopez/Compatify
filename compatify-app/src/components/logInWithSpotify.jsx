@@ -7,6 +7,12 @@ class LogInWithSpotify extends Component {
 
   logInWithSpotify = async () => {
     const authURl = await sptfy.authorizeSpotifyAccountAccess();
+    const { compatifyShareUrl } = this.props;
+
+    if (compatifyShareUrl) {
+      sptfy.saveShareUrl(compatifyShareUrl);
+    }
+
     window.location = authURl;
   };
 

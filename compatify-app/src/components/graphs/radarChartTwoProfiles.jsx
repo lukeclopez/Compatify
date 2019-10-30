@@ -9,50 +9,49 @@ import {
   Tooltip
 } from "recharts";
 
-class RadarChartCompat extends Component {
+class RadarChartTwoProfiles extends Component {
   state = {};
 
-  makeDataObject = data => {
-    const {
-      avg_track_valence,
-      avg_track_instru,
-      avg_track_popularity,
-      avg_track_energy,
-      range
-    } = data;
-
-    return [
+  makeDataObject = (data1, data2) => {
+    const obj = [
       {
         trait: "Valence",
-        A: avg_track_valence,
+        A: data1.avg_track_valence,
+        B: data2.avg_track_valence,
         fullMark: 1
       },
       {
         trait: "Instrumentalness",
-        A: avg_track_instru,
+        A: data1.avg_track_instru,
+        B: data2.avg_track_instru,
         fullMark: 1
       },
       {
         trait: "Popularity",
-        A: avg_track_popularity,
+        A: data1.avg_track_popularity,
+        B: data2.avg_track_popularity,
         fullMark: 1
       },
       {
         trait: "Energy",
-        A: avg_track_energy,
+        A: data1.avg_track_energy,
+        B: data2.avg_track_energy,
         fullMark: 1
       },
       {
         trait: "Range",
-        A: range,
+        A: data1.range,
+        B: data2.range,
         fullMark: 1
       }
     ];
+
+    return obj;
   };
 
   render() {
-    const { name, data } = this.props;
-    const radarData = this.makeDataObject(data);
+    const { data1, data2 } = this.props;
+    const radarData = this.makeDataObject(data1, data2);
 
     return (
       <RadarChart outerRadius={120} width={500} height={400} data={radarData}>
@@ -60,10 +59,17 @@ class RadarChartCompat extends Component {
         <PolarAngleAxis dataKey="trait" />
         <PolarRadiusAxis angle={30} domain={[0, 1]} />
         <Radar
-          name={name}
+          name={data1.user_id}
           dataKey="A"
           stroke="#8884d8"
           fill="#8884d8"
+          fillOpacity={0.6}
+        />
+        <Radar
+          name={data2.user_id}
+          dataKey="B"
+          stroke="#800000"
+          fill="#800000"
           fillOpacity={0.6}
         />
         <Legend />
@@ -73,4 +79,4 @@ class RadarChartCompat extends Component {
   }
 }
 
-export default RadarChartCompat;
+export default RadarChartTwoProfiles;

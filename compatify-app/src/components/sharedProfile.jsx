@@ -26,15 +26,7 @@ class SharedProfile extends Component {
 
   render() {
     const { data, loading, error } = this.state;
-    const {
-      user_id,
-      avg_track_valence,
-      avg_track_instru,
-      avg_track_popularity,
-      avg_track_energy,
-      range,
-      share_url
-    } = data;
+    const { user_id, share_url } = data;
     const currentUser = sptfy.getSpotifyUserId();
 
     if (loading) return <Loader message={"Getting profile"} />;
@@ -46,14 +38,7 @@ class SharedProfile extends Component {
         <h1>{user_id}</h1>
         {user_id === currentUser &&
           "This is what others will see when they use your share URL."}
-        <RadarChartCompat
-          name={user_id}
-          valence={avg_track_valence}
-          instrumentalness={avg_track_instru}
-          popularity={avg_track_popularity}
-          energy={avg_track_energy}
-          range={range}
-        />
+        <RadarChartCompat name={user_id} data={data} />
         <p>Are we musically compatible? Log in with Spotify to find out!</p>
         <LogInWithSpotify compatifyShareUrl={share_url} />
       </>

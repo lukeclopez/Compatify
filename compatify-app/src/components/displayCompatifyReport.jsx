@@ -1,82 +1,129 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import sptfy from "../services/spotifyService";
 import Loader from "./common/loader";
-import RadarChartCompat from "./graphs/radarChartCompat";
-import ShareUrl from "./shareUrl";
+import RadarChartTwoProfiles from "./graphs/radarChartTwoProfiles";
 
 class DisplayCompatifyReport extends Component {
-  state = { data: {}, loading: true, error: "" };
+  state = {
+    user1Data: {},
+    user2Data: {},
+    compatibilityReport: {},
+    loading: true,
+    error: ""
+  };
 
-  componentDidMount() {
-    this.getProfileData();
+  async componentDidMount() {
+    try {
+      const data = await this.getData();
+      const { user1Data, user2Data, compatibilityReport } = data;
+      this.setState({
+        user1Data,
+        user2Data,
+        compatibilityReport,
+        loading: false
+      });
+    } catch (ex) {
+      this.setState({
+        loading: false,
+        error: "Couldn't get compatibility report."
+      });
+    }
   }
 
-  getProfileData = async () => {
+  getData = async () => {
+    const user1Data = await this.getUser1Data();
+    const user2Data = await this.getUser2Data();
+    const compatibilityReport = await this.getCompatibilityReport();
+
+    const obj = {
+      user1Data,
+      user2Data,
+      compatibilityReport
+    };
+
+    return obj;
+  };
+
+  getUser1Data = async () => {
     const refreshToken = sptfy.getRefreshToken();
+
     if (!refreshToken) {
       this.props.history.push("/login");
       return null;
     }
+
     const currentUser = await sptfy.getCurrentSpotifyUser(refreshToken);
     const userId = currentUser.data.id;
+    const user1Data = await sptfy.getProfile(userId);
+
+    return user1Data.data;
+  };
+
+  getUser2Data = async () => {
     const shareUrl = sptfy.getShareUrl();
+    const user2Data = await sptfy.getSharedProfile(shareUrl);
+
+    return user2Data.data;
+  };
+
+  getCompatibilityReport = async () => {
+    const userId = sptfy.getSpotifyUserId();
+    const shareUrl = sptfy.getShareUrl();
+
     sptfy.removeShareUrl();
-    try {
-      const data = await sptfy.getCompatibilityReport(userId, shareUrl);
-      this.setState({ data: data.data, loading: false });
-    } catch (ex) {
-      if (ex.response && ex.response.status === 404) {
-        this.setState({ loading: false, error: "Could not find profile!" });
-      }
-    }
+
+    const report = await sptfy.getCompatibilityReport(userId, shareUrl);
+
+    return report.data;
   };
 
   render() {
-    const { data, loading, error } = this.state;
     const {
-      user_id,
-      avg_track_valence,
-      avg_track_instru,
-      avg_track_popularity,
-      avg_track_energy,
-      range,
-      genres,
-      artists,
-      share_url
-    } = data;
+      user1Data,
+      user2Data,
+      compatibilityReport,
+      loading,
+      error
+    } = this.state;
 
-    if (loading) return <Loader message={"Getting profile"} />;
+    if (loading || !compatibilityReport)
+      return <Loader message={"Calculating musical compatibility"} />;
+
+    const {
+      overlapping_artists,
+      overlapping_genres,
+      differences,
+      average_difference
+    } = compatibilityReport;
+    const {
+      valence_diff,
+      instru_diff,
+      popularity_diff,
+      energy_diff,
+      range_diff
+    } = differences;
 
     if (error) return <>{error}</>;
 
-    return <h1>hi</h1>;
-
     return (
       <>
-        <h1>{user_id}</h1>
-        <Link to="/create-profile">
-          <button className="btn btn-primary">Update Profile</button>
-        </Link>
-
-        <ShareUrl userId={user_id} shareUrl={share_url} />
-
-        <RadarChartCompat
-          name={user_id}
-          valence={avg_track_valence}
-          instrumentalness={avg_track_instru}
-          popularity={avg_track_popularity}
-          energy={avg_track_energy}
-          range={range}
-        />
+        <h1>
+          {user1Data.user_id} and {user2Data.user_id}
+        </h1>
+        <RadarChartTwoProfiles data1={user1Data} data2={user2Data} />
+        <p>
+          Differences: {valence_diff}, {instru_diff}, {popularity_diff},
+          {energy_diff}, {range_diff}
+        </p>
+        <p>Average Difference: {average_difference}</p>
         <h4>Genres</h4>
-        {genres.map((g, index) => {
+        {overlapping_genres.map((g, index) => {
           return <li key={index}>{g}</li>;
         })}
         <h4>Artists</h4>
         <ul>
-          {artists.map((a, index) => {
-            return <li key={index}>{a.name}</li>;
+          {overlapping_artists.map((a, index) => {
+            return <li key={index}>{a[0]}</li>;
           })}
         </ul>
       </>

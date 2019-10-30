@@ -58,8 +58,8 @@ export function getProfile(userId) {
   return http.get(apiUrl + `/get_profile/?user_id=${userId}`);
 }
 
-export function getSharedProfile(code) {
-  return http.get(apiUrl + `/get_shared_profile/?code=${code}`);
+export function getSharedProfile(shareUrl) {
+  return http.get(apiUrl + `/get_shared_profile/?code=${shareUrl}`);
 }
 
 export function getCompatibilityReport(userId, shareUrl) {

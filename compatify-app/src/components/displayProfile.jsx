@@ -42,6 +42,13 @@ class DisplayProfile extends Component {
       artists,
       share_url
     } = data;
+    const radarData = {
+      avg_track_valence,
+      avg_track_instru,
+      avg_track_popularity,
+      avg_track_energy,
+      range
+    };
 
     if (loading) return <Loader message={"Getting profile"} />;
 
@@ -56,14 +63,7 @@ class DisplayProfile extends Component {
 
         <ShareUrl userId={user_id} shareUrl={share_url} />
 
-        <RadarChartCompat
-          name={user_id}
-          valence={avg_track_valence}
-          instrumentalness={avg_track_instru}
-          popularity={avg_track_popularity}
-          energy={avg_track_energy}
-          range={range}
-        />
+        <RadarChartCompat name={user_id} data={radarData} />
         <h4>Genres</h4>
         {genres.map((g, index) => {
           return <li key={index}>{g}</li>;

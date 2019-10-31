@@ -19,7 +19,7 @@ class LogInWithSpotify extends Component {
   render() {
     return (
       <button className="btn btn-primary" onClick={this.logInWithSpotify}>
-        Log In With Spotify
+        {this.props.message || "Log in with Spotify"}
       </button>
     );
   }

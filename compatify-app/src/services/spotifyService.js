@@ -62,9 +62,15 @@ export function getSharedProfile(shareUrl) {
   return http.get(apiUrl + `/get_shared_profile/?code=${shareUrl}`);
 }
 
-export function getCompatibilityReport(userId, shareUrl) {
+export function createCompatibilityReport(userId, shareUrl) {
   const data = { user_id: userId, share_url: shareUrl };
   return http.post(apiUrl + "/compatify/", qs.stringify(data));
+}
+
+export function getCompatibilityReport(userId1, userId2) {
+  return http.get(
+    apiUrl + `/get_report/?user_1_id=${userId1}&user_2_id=${userId2}`
+  );
 }
 
 export function getToken(url) {
@@ -110,6 +116,7 @@ export async function getNewShareUrl() {
 
 export default {
   authorizeSpotifyAccountAccess,
+  createCompatibilityReport,
   getCompatibilityReport,
   getCurrentSpotifyUser,
   removeRefreshToken,

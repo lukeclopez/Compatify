@@ -71,7 +71,7 @@ class CreateCompatifyReport extends Component {
   };
 
   createReport = async (userId, shareUrl) => {
-    //sptfy.removeShareUrl();
+    sptfy.removeShareUrl();
 
     const report = await sptfy.createCompatibilityReport(userId, shareUrl);
 

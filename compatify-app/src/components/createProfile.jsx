@@ -28,7 +28,7 @@ class CreateProfile extends Component {
     const { loading } = this.state;
 
     if (loading) return <Loader message={"Creating profile for " + userId} />;
-    if (shareUrl) return <></>;
+    if (shareUrl) return <Redirect to={"compatify/"} />;
 
     return <Redirect to={`profile/${userId}`} />;
   }

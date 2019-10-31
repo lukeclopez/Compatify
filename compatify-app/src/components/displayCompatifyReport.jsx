@@ -107,25 +107,28 @@ class DisplayCompatifyReport extends Component {
         <p>Average Difference: {average_difference}</p>
         <h4>Genres in Common</h4>
         <ul>
-          {overlapping_genres.map((g, index) => {
-            return <li key={index}>{g}</li>;
-          })}
+          {overlapping_genres &&
+            overlapping_genres.map((g, index) => {
+              return <li key={index}>{g}</li>;
+            })}
         </ul>
         <h4>Artists in Common</h4>
         <ul>
-          {overlapping_artists.map((a, index) => {
-            return <li key={index}>{a.name}</li>;
-          })}
+          {overlapping_artists &&
+            overlapping_artists.map((a, index) => {
+              return <li key={index}>{a.name}</li>;
+            })}
         </ul>
         <h4>Tracks in Common</h4>
         <ul>
-          {overlapping_tracks.map((t, index) => {
-            return (
-              <li key={index}>
-                {t.name} by {t.artists[0].name}
-              </li>
-            );
-          })}
+          {overlapping_tracks &&
+            overlapping_tracks.map((t, index) => {
+              return (
+                <li key={index}>
+                  {t.name} by {t.artists[0].name}
+                </li>
+              );
+            })}
         </ul>
       </>
     );

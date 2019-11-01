@@ -54,8 +54,18 @@ export function createProfile(userId, refreshToken) {
   );
 }
 
-export function getProfile(userId) {
-  return http.get(apiUrl + `/get_profile/?user_id=${userId}`);
+export async function getProfile(userId) {
+  const profile = await http.get(apiUrl + `/get_profile/?user_id=${userId}`);
+  const spotifyUser = await getSpotifyUser(userId);
+  const { user_id, share_url } = spotifyUser.data;
+
+  const data = { user_id, share_url, ...profile.data };
+
+  return data;
+}
+
+export function getSpotifyUser(userId) {
+  return http.get(apiUrl + `/get_spotify_user/?user_id=${userId}`);
 }
 
 export function getSharedProfile(shareUrl) {
@@ -94,7 +104,6 @@ export async function getCurrentSpotifyUser(refreshToken) {
 
   const payload = `refresh_token=${refreshToken}`;
   const currentUser = await http.post(apiUrl + "/get_current_user/", payload);
-  console.log(currentUser);
   saveSpotifyUserId(currentUser.data.id);
 
   return currentUser;

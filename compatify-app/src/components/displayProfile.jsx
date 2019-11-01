@@ -22,7 +22,7 @@ class DisplayProfile extends Component {
     const currentUser = await sptfy.getCurrentSpotifyUser(refreshToken);
     try {
       const data = await sptfy.getProfile(currentUser.data.id);
-      this.setState({ data: data.data, loading: false });
+      this.setState({ data, loading: false });
     } catch (ex) {
       if (ex.response && ex.response.status === 404) {
         this.setState({ loading: false, error: "Could not find profile!" });

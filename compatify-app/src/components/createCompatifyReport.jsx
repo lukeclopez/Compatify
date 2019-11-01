@@ -61,13 +61,13 @@ class CreateCompatifyReport extends Component {
     const userId = currentUser.data.id;
     const user1Data = await sptfy.getProfile(userId);
 
-    return user1Data.data;
+    return user1Data;
   };
 
   getUser2Data = async shareUrl => {
     const user2Data = await sptfy.getSharedProfile(shareUrl);
 
-    return user2Data.data;
+    return user2Data;
   };
 
   createReport = async (userId, shareUrl) => {

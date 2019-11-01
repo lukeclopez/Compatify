@@ -107,11 +107,14 @@ export function getUserShareUrl(userId) {
 export async function getNewShareUrl() {
   const refreshToken = getRefreshToken();
   const { data } = await getCurrentSpotifyUser(refreshToken);
-  console.log(data);
   const newShareUrl = http.get(
     apiUrl + "/new_share_url/" + `?user_id=${data.id}`
   );
   return newShareUrl;
+}
+
+export function getAllReportsForUser(userId) {
+  return http.get(apiUrl + `/get_all_reports_for_user/?user_1_id=${userId}`);
 }
 
 export default {
@@ -119,6 +122,7 @@ export default {
   createCompatibilityReport,
   getCompatibilityReport,
   getCurrentSpotifyUser,
+  getAllReportsForUser,
   removeRefreshToken,
   saveSpotifyUserId,
   getSpotifyUserId,

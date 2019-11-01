@@ -4,6 +4,7 @@ import sptfy from "../services/spotifyService";
 import Loader from "./common/loader";
 import RadarChartCompat from "./graphs/radarChartCompat";
 import ShareUrl from "./shareUrl";
+import MyReports from "./myReports";
 
 class DisplayProfile extends Component {
   state = { data: {}, loading: true, error: "" };
@@ -64,6 +65,10 @@ class DisplayProfile extends Component {
         <ShareUrl userId={user_id} shareUrl={share_url} />
 
         <RadarChartCompat name={user_id} data={radarData} />
+        <p>
+          <h4>My Reports</h4>
+          <MyReports userId={user_id} />
+        </p>
         <h4>Genres</h4>
         {genres.map((g, index) => {
           return <li key={index}>{g}</li>;

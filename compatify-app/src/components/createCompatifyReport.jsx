@@ -50,16 +50,12 @@ class CreateCompatifyReport extends Component {
   };
 
   getUser1Data = async () => {
-    const refreshToken = sptfy.getRefreshToken();
+    const { user, getUser } = this.props;
+    const forceLogin = true;
 
-    if (!refreshToken) {
-      this.props.history.push("/login");
-      return null;
-    }
+    if (!user) getUser(forceLogin);
 
-    const currentUser = await sptfy.getCurrentSpotifyUser(refreshToken);
-    const userId = currentUser.data.id;
-    const user1Data = await sptfy.getProfile(userId);
+    const user1Data = user.id;
 
     return user1Data;
   };

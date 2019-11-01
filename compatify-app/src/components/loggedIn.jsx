@@ -13,6 +13,8 @@ class LoggedIn extends Component {
 
     this.getProfileData(userId);
     this.saveRefreshToken(currentUrl);
+
+    // this.props.onLogin();
   }
 
   getProfileData = async userId => {

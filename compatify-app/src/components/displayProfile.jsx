@@ -14,14 +14,16 @@ class DisplayProfile extends Component {
   }
 
   getProfileData = async () => {
-    const refreshToken = sptfy.getRefreshToken();
-    if (!refreshToken) {
-      this.props.history.push("/login");
+    const { user, getUser } = this.props;
+    const forceLogin = true;
+
+    if (!user.id) {
+      getUser(forceLogin);
       return null;
     }
-    const currentUser = await sptfy.getCurrentSpotifyUser(refreshToken);
+
     try {
-      const data = await sptfy.getProfile(currentUser.data.id);
+      const data = await sptfy.getProfile(user.id);
       this.setState({ data, loading: false });
     } catch (ex) {
       if (ex.response && ex.response.status === 404) {

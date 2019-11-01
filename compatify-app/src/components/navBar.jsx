@@ -2,8 +2,10 @@ import React from "react";
 import { Link, NavLink } from "react-router-dom";
 
 const NavBar = props => {
+  const { user } = props;
+
   return (
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <Link className="navbar-brand" to="/">
         Compatify
       </Link>
@@ -25,6 +27,17 @@ const NavBar = props => {
           </NavLink>
         </div>
       </div>
+      {user.id && (
+        <Link className="navbar-brand" to="/profile">
+          <img
+            src={user.images && user.images[0].url}
+            width="75"
+            height="75"
+            alt=""
+            style={{ borderRadius: 50 }}
+          />
+        </Link>
+      )}
     </nav>
   );
 };

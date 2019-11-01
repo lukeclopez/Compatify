@@ -122,8 +122,12 @@ export async function getNewShareUrl() {
   return newShareUrl;
 }
 
-export function getAllReportsForUser(userId) {
-  return http.get(apiUrl + `/get_all_reports_for_user/?user_1_id=${userId}`);
+export async function getAllReportsForUser(userId) {
+  const response = await http.get(
+    apiUrl + `/get_all_reports_for_user/?user_1_id=${userId}`
+  );
+
+  return response.data;
 }
 
 export default {

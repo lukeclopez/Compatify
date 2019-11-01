@@ -99,6 +99,7 @@ class DisplayCompatifyReport extends Component {
         <h1>
           {user1Data.user_id} and {user2Data.user_id}
         </h1>
+        <h4>{report.creation_date}</h4>
         <RadarChartTwoProfiles data1={user1Data} data2={user2Data} />
         <p>
           Differences: {valence_diff}, {instru_diff}, {popularity_diff},

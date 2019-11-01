@@ -11,7 +11,7 @@ class MyReports extends Component {
 
   getData = async () => {
     const response = await sptfy.getAllReportsForUser(this.props.userId);
-    this.setState({ data: response.data, loading: false });
+    this.setState({ data: response, loading: false });
   };
 
   render() {
@@ -27,8 +27,8 @@ class MyReports extends Component {
           {reports.map(r => {
             return (
               <li>
-                <Link to={`/display-report/${r.user_1_id}/${r.user_2_id}`}>
-                  {r.user_1_id} and {r.user_2_id}
+                <Link to={`/display-report/${r.user1_name}/${r.user2_name}`}>
+                  {r.user1_name} and {r.user2_name}, {r.creation_date}
                 </Link>
               </li>
             );

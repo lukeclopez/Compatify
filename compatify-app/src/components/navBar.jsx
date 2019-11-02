@@ -22,9 +22,16 @@ const NavBar = props => {
       </button>
       <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div className="navbar-nav">
-          <NavLink className="nav-item nav-link" to="/profile">
-            My Profile
-          </NavLink>
+          {user.id && (
+            <>
+              <NavLink className="nav-item nav-link" to="/profile">
+                My Profile
+              </NavLink>
+              <NavLink className="nav-item nav-link" to="/logout">
+                Logout
+              </NavLink>
+            </>
+          )}
         </div>
       </div>
       {user.id && (

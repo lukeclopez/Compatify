@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Route, Redirect, Switch, withRouter } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import sptfy from "./services/spotifyService";
+import Loader from "./components/common/loader";
 import LogInWithSpotify from "./components/logInWithSpotify";
 import CreateProfile from "./components/createProfile";
 import DisplayProfile from "./components/displayProfile";
@@ -17,7 +18,8 @@ import "./App.css";
 
 class App extends Component {
   state = {
-    user: {}
+    user: {},
+    loading: true
   };
 
   componentDidMount() {
@@ -35,7 +37,9 @@ class App extends Component {
     }
     if (user) {
       toast.success(`Welcome, ${user.data.id}!`);
-      this.setState({ user: user.data });
+      this.setState({ user: user.data, loading: false });
+    } else if (!user) {
+      this.setState({ loading: false });
     }
   };
 
@@ -46,7 +50,10 @@ class App extends Component {
   };
 
   render() {
-    const { user } = this.state;
+    const { user, loading } = this.state;
+
+    if (loading) return <Loader message="Checking" />;
+
     return (
       <>
         <ToastContainer />

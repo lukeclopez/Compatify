@@ -35,6 +35,10 @@ export function getSpotifyUserId() {
   return localStorage.getItem(userIdKey);
 }
 
+export function removeSpotifyUserId() {
+  return localStorage.removeItem(userIdKey);
+}
+
 export function saveRefreshToken(refreshToken) {
   localStorage.setItem(refreshTokenKey, refreshToken);
 }
@@ -100,7 +104,10 @@ export function getUserId() {
 }
 
 export async function getCurrentSpotifyUser(refreshToken) {
-  if (!refreshToken) return null;
+  if (!refreshToken) {
+    removeSpotifyUserId();
+    return null;
+  }
 
   const payload = `refresh_token=${refreshToken}`;
   const currentUser = await http.post(apiUrl + "/get_current_user/", payload);

@@ -7,12 +7,13 @@ import DisplayCompatifyReport from "./displayCompatifyReport";
 class LoggedIn extends Component {
   state = { data: {}, loading: true, profileExists: true };
 
-  componentDidMount() {
-    const userId = sptfy.getUserId();
+  async componentDidMount() {
     const currentUrl = window.location;
-
-    this.getProfileData(userId);
     this.saveRefreshToken(currentUrl);
+
+    const refreshToken = sptfy.getRefreshToken();
+    const userId = await sptfy.getCurrentSpotifyUser(refreshToken);
+    this.getProfileData(userId);
   }
 
   getProfileData = async userId => {

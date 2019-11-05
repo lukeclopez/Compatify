@@ -8,7 +8,7 @@ const ArtistsCard = props => {
       <div className="card-columns">
         {artists.map((a, index) => {
           return (
-            <div key={index} className="card">
+            <div key={index} className="card text-white bg-dark mb-3">
               <img
                 src={a.images[0] && a.images[0].url}
                 className="card-img-top"
@@ -29,7 +29,9 @@ const ArtistsCard = props => {
                   <b>Genres</b>
                   <ul className="list-group">
                     {a.genres.map(g => (
-                      <li className="list-group-item">{g}</li>
+                      <li className="list-group-item list-group-item-dark">
+                        {g}
+                      </li>
                     ))}
                   </ul>
                 </p>

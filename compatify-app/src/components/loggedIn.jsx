@@ -12,8 +12,8 @@ class LoggedIn extends Component {
     this.saveRefreshToken(currentUrl);
 
     const refreshToken = sptfy.getRefreshToken();
-    const userId = await sptfy.getCurrentSpotifyUser(refreshToken);
-    this.getProfileData(userId);
+    const response = await sptfy.getCurrentSpotifyUser(refreshToken);
+    this.getProfileData(response.data.id);
   }
 
   getProfileData = async userId => {

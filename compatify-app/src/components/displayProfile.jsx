@@ -5,6 +5,7 @@ import Loader from "./common/loader";
 import RadarChartCompat from "./graphs/radarChartCompat";
 import ShareUrl from "./shareUrl";
 import MyReports from "./myReports";
+import ArtistsCard from "./artistsCard";
 
 class DisplayProfile extends Component {
   state = { data: {}, loading: true, error: "" };
@@ -73,12 +74,7 @@ class DisplayProfile extends Component {
         {genres.map((g, index) => {
           return <li key={index}>{g}</li>;
         })}
-        <h4>Artists</h4>
-        <ul>
-          {artists.map((a, index) => {
-            return <li key={index}>{a.name}</li>;
-          })}
-        </ul>
+        <ArtistsCard artists={artists} />
       </>
     );
   }

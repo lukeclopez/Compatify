@@ -23,6 +23,7 @@ class DisplayCompatifyReport extends Component {
         loading: false
       });
     } catch (ex) {
+      console.log(ex);
       this.setState({
         loading: false,
         error: "Couldn't get compatibility report."
@@ -31,10 +32,11 @@ class DisplayCompatifyReport extends Component {
   }
 
   getData = async () => {
-    const { user2Id } = this.props.match.params;
+    const { pk } = this.props.match.params;
+    const report = await this.getReport(pk);
     const user1Data = await this.getUser1Data();
-    const user2Data = await this.getUser2Data(user2Id);
-    const report = await this.getReport(user1Data.user_id, user2Id);
+    const user2 = await sptfy.getSpotifyUserByPk(report.user2);
+    const user2Data = await this.getUser2Data(user2.user_id);
 
     const obj = {
       user1Data,
@@ -67,8 +69,8 @@ class DisplayCompatifyReport extends Component {
     return user2Data;
   };
 
-  getReport = async (userId1, userId2) => {
-    const report = await sptfy.getCompatibilityReport(userId1, userId2);
+  getReport = async pk => {
+    const report = await sptfy.getCompatibilityReport(pk);
 
     return report.data;
   };

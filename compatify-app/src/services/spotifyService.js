@@ -72,6 +72,11 @@ export function getSpotifyUser(userId) {
   return http.get(apiUrl + `/get_spotify_user/?user_id=${userId}`);
 }
 
+export async function getSpotifyUserByPk(pk) {
+  const response = await http.get(apiUrl + `/get_spotify_user_by_pk/?pk=${pk}`);
+  return response.data;
+}
+
 export async function getSharedProfile(shareUrl) {
   const response = await http.get(
     apiUrl + `/get_shared_profile/?code=${shareUrl}`
@@ -84,10 +89,8 @@ export function createCompatibilityReport(userId, shareUrl) {
   return http.post(apiUrl + "/compatify/", qs.stringify(data));
 }
 
-export function getCompatibilityReport(userId1, userId2) {
-  return http.get(
-    apiUrl + `/get_report/?user_1_id=${userId1}&user_2_id=${userId2}`
-  );
+export function getCompatibilityReport(pk) {
+  return http.get(apiUrl + `/get_report/?pk=${pk}`);
 }
 
 export function getToken(url) {
@@ -147,6 +150,7 @@ export default {
   getCurrentSpotifyUser,
   getAllReportsForUser,
   removeRefreshToken,
+  getSpotifyUserByPk,
   saveSpotifyUserId,
   getSpotifyUserId,
   saveRefreshToken,

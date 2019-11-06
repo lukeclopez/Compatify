@@ -3,12 +3,13 @@ import { Link } from "react-router-dom";
 import sptfy from "../services/spotifyService";
 import Loader from "./common/loader";
 import RadarChartCompat from "./graphs/radarChartCompat";
-import ShareUrl from "./shareUrl";
+import BioCard from "./bioCard";
+
 import MyReports from "./myReports";
 import ArtistsCard from "./artistsCard";
 
 class DisplayProfile extends Component {
-  state = { data: {}, loading: true, error: "" };
+  state = { data: {}, currentUser: {}, loading: true, error: "" };
 
   componentDidMount() {
     this.getProfileData();
@@ -23,7 +24,7 @@ class DisplayProfile extends Component {
     const currentUser = await sptfy.getCurrentSpotifyUser(refreshToken);
     try {
       const data = await sptfy.getProfile(currentUser.data.id);
-      this.setState({ data, loading: false });
+      this.setState({ data, currentUser: currentUser.data, loading: false });
     } catch (ex) {
       if (ex.response && ex.response.status === 404) {
         this.setState({ loading: false, error: "Could not find profile!" });
@@ -32,7 +33,7 @@ class DisplayProfile extends Component {
   };
 
   render() {
-    const { data, loading, error } = this.state;
+    const { data, currentUser, loading, error } = this.state;
     const {
       user_id,
       avg_track_valence,
@@ -44,6 +45,7 @@ class DisplayProfile extends Component {
       artists,
       share_url
     } = data;
+    const { images } = currentUser;
     const radarData = {
       avg_track_valence,
       avg_track_instru,
@@ -56,24 +58,17 @@ class DisplayProfile extends Component {
 
     if (error) return <>{error}</>;
 
+    const center = "d-flex justify-content-center";
+
     return (
       <>
-        <h1>{user_id}</h1>
-        <Link to="/create-profile">
-          <button className="btn btn-primary">Update Profile</button>
-        </Link>
+        <BioCard currentUser={currentUser} data={data} />
 
-        <ShareUrl userId={user_id} shareUrl={share_url} />
+        <span className={center}>
+          <RadarChartCompat name={user_id} data={radarData} />
+        </span>
 
-        <RadarChartCompat name={user_id} data={radarData} />
-        <p>
-          <h4>My Reports</h4>
-          <MyReports userId={user_id} />
-        </p>
-        <h4>Genres</h4>
-        {genres.map((g, index) => {
-          return <li key={index}>{g}</li>;
-        })}
+        <MyReports userId={user_id} />
         <ArtistsCard artists={artists} />
       </>
     );

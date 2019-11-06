@@ -23,17 +23,14 @@ const ArtistsCard = props => {
               <div className="card-body">
                 <h5 className="card-title">{a.name}</h5>
                 <p className="card-text">
-                  <b>Popularity:</b> {a.popularity}/100
+                  <b>Popularity: </b>
+                  {a.popularity}/100
                 </p>
                 <p className="card-text">
-                  <b>Genres</b>
-                  <ul className="list-group">
-                    {a.genres.map(g => (
-                      <li className="list-group-item list-group-item-dark">
-                        {g}
-                      </li>
-                    ))}
-                  </ul>
+                  <b>Genres: </b>
+                  {a.genres.map(g => (
+                    <li>{g}</li>
+                  ))}
                 </p>
                 <a href={a.external_urls.spotify} className="btn btn-primary">
                   View on Spotify

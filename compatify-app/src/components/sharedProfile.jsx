@@ -16,7 +16,7 @@ class SharedProfile extends Component {
     const code = this.props.match.params.shareCode;
     try {
       const data = await sptfy.getSharedProfile(code);
-      this.setState({ data: data.data, loading: false });
+      this.setState({ data, loading: false });
     } catch (ex) {
       if (ex.response && ex.response.status === 404) {
         this.setState({ loading: false, error: "Invalid code!" });

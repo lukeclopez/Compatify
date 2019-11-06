@@ -53,7 +53,7 @@ class BioCard extends Component {
           {activeTab === info && (
             <>
               <p className="card-text">
-                <img src={images[0].url} />
+                <img src={images[0] && images[0].url} />
               </p>
               <a href={external_urls.spotify} className="btn btn-primary">
                 View on Spotify

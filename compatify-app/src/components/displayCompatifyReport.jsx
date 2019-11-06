@@ -64,7 +64,7 @@ class DisplayCompatifyReport extends Component {
     const response = await sptfy.getUserShareUrl(user2Id);
     const user2Data = await sptfy.getSharedProfile(response.data.share_url);
 
-    return user2Data.data;
+    return user2Data;
   };
 
   getReport = async (userId1, userId2) => {

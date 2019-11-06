@@ -72,8 +72,11 @@ export function getSpotifyUser(userId) {
   return http.get(apiUrl + `/get_spotify_user/?user_id=${userId}`);
 }
 
-export function getSharedProfile(shareUrl) {
-  return http.get(apiUrl + `/get_shared_profile/?code=${shareUrl}`);
+export async function getSharedProfile(shareUrl) {
+  const response = await http.get(
+    apiUrl + `/get_shared_profile/?code=${shareUrl}`
+  );
+  return response.data;
 }
 
 export function createCompatibilityReport(userId, shareUrl) {

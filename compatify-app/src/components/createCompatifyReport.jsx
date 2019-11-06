@@ -85,6 +85,8 @@ class CreateCompatifyReport extends Component {
       return <Loader message={"Calculating musical compatibility"} />;
     if (error) return <>{error}</>;
 
+    console.log(user2Data);
+
     return (
       <Redirect
         to={`/display-report/${user1Data.user_id}/${user2Data.user_id}`}

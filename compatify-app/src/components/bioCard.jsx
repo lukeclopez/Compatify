@@ -23,7 +23,7 @@ class BioCard extends Component {
     const { info, sharing, options } = tabTitles;
 
     return (
-      <div className="card text-center">
+      <div className="card text-white bg-dark mb-3 text-center">
         <div className="card-header">
           <ul className="nav nav-tabs card-header-tabs">
             <NavTab

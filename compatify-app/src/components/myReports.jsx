@@ -23,17 +23,25 @@ class MyReports extends Component {
 
     return (
       <>
-        <ul>
-          {reports.map(r => {
-            return (
-              <li>
-                <Link to={`/display-report/${r.user1_name}/${r.user2_name}`}>
-                  {r.user1_name} and {r.user2_name}, {r.creation_date}
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
+        <div class="card text-white bg-dark mb-3">
+          <div class="card-body">
+            <p class="card-text"></p>
+            <h4>My Compatify Reports</h4>
+            <ul>
+              {reports.map(r => {
+                return (
+                  <li>
+                    <Link
+                      to={`/display-report/${r.user1_name}/${r.user2_name}`}
+                    >
+                      You and {r.user2_name}, {r.creation_date}
+                    </Link>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        </div>
       </>
     );
   }

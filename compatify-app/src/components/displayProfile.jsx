@@ -64,11 +64,11 @@ class DisplayProfile extends Component {
       <>
         <BioCard currentUser={currentUser} data={data} />
 
-        <span className={center}>
+        <div className="card-group">
           <RadarChartCompat name={user_id} data={radarData} />
-        </span>
+          <MyReports userId={user_id} />
+        </div>
 
-        <MyReports userId={user_id} />
         <ArtistsCard artists={artists} />
       </>
     );

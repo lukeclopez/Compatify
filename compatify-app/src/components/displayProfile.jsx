@@ -4,9 +4,8 @@ import sptfy from "../services/spotifyService";
 import Loader from "./common/loader";
 import RadarChartCompat from "./graphs/radarChartCompat";
 import BioCard from "./bioCard";
-
 import MyReports from "./myReports";
-import ArtistsCard from "./artistsCard";
+import ArtistsCards from "./artistsCards";
 
 class DisplayProfile extends Component {
   state = { data: {}, currentUser: {}, loading: true, error: "" };
@@ -64,12 +63,12 @@ class DisplayProfile extends Component {
       <>
         <BioCard currentUser={currentUser} data={data} />
 
-        <div className="card-group">
+        <div className="card-deck">
           <RadarChartCompat name={user_id} data={radarData} />
           <MyReports userId={user_id} />
         </div>
 
-        <ArtistsCard artists={artists} />
+        <ArtistsCards artists={artists} />
       </>
     );
   }

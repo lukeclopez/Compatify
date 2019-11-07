@@ -2,6 +2,10 @@ import React, { Component } from "react";
 import sptfy from "../services/spotifyService";
 import Loader from "./common/loader";
 import RadarChartTwoProfiles from "./graphs/radarChartTwoProfiles";
+import ReportTitleCard from "./reportTitleCard";
+import ArtistsCards from "./artistsCards";
+import Genres from "./genres";
+import Tracks from "./tracks";
 
 class DisplayCompatifyReport extends Component {
   state = {
@@ -98,41 +102,22 @@ class DisplayCompatifyReport extends Component {
 
     return (
       <>
-        <h1>
-          {user1Data.user_id} and {user2Data.user_id}
-        </h1>
-        <h4>{report.creation_date}</h4>
+        <ReportTitleCard
+          user1Data={user1Data}
+          user2Data={user2Data}
+          report={report}
+        />
+
         <RadarChartTwoProfiles data1={user1Data} data2={user2Data} />
-        <p>
-          Differences: {valence_diff}, {instru_diff}, {popularity_diff},
-          {energy_diff}, {range_diff}
-        </p>
-        <p>Average Difference: {average_difference}</p>
+
         <h4>Genres in Common</h4>
-        <ul>
-          {overlapping_genres &&
-            overlapping_genres.map((g, index) => {
-              return <li key={index}>{g}</li>;
-            })}
-        </ul>
+        <Genres genres={overlapping_genres} />
+
         <h4>Artists in Common</h4>
-        <ul>
-          {overlapping_artists &&
-            overlapping_artists.map((a, index) => {
-              return <li key={index}>{a.name}</li>;
-            })}
-        </ul>
+        <ArtistsCards artists={overlapping_artists} />
+
         <h4>Tracks in Common</h4>
-        <ul>
-          {overlapping_tracks &&
-            overlapping_tracks.map((t, index) => {
-              return (
-                <li key={index}>
-                  {t.name} by {t.artists[0].name}
-                </li>
-              );
-            })}
-        </ul>
+        <Tracks tracks={overlapping_tracks} />
       </>
     );
   }

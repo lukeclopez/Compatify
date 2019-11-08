@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
 import sptfy from "../services/spotifyService";
 import Loader from "./common/loader";
-import DisplayCompatifyReport from "./displayCompatifyReport";
 
 class CreateCompatifyReport extends Component {
   state = {

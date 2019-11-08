@@ -12,7 +12,7 @@ class BioCard extends Component {
 
   render() {
     const { currentUser, data } = this.props;
-    const { id, images, external_urls, share_url } = currentUser;
+    const { id, images, external_urls } = currentUser;
     const { activeTab } = this.state;
 
     const tabTitles = {
@@ -53,7 +53,7 @@ class BioCard extends Component {
           {activeTab === info && (
             <>
               <p className="card-text">
-                <img src={images[0] && images[0].url} />
+                <img src={images[0] && images[0].url} alt="Profile" />
               </p>
               <a href={external_urls.spotify} className="btn btn-primary">
                 View on Spotify

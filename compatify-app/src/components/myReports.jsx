@@ -23,14 +23,14 @@ class MyReports extends Component {
 
     return (
       <>
-        <div class="card text-white bg-dark mb-3">
-          <div class="card-body">
-            <p class="card-text"></p>
+        <div className="card text-white bg-dark mb-3">
+          <div className="card-body">
+            <p className="card-text"></p>
             <h4>My Compatify Reports</h4>
             <ul>
               {reports.map(r => {
                 return (
-                  <li>
+                  <li key={r.creation_date + r.id}>
                     <Link to={`/display-report/${r.id}`}>
                       You and {r.user2_name}, {r.creation_date}
                     </Link>

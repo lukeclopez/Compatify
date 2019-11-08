@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import sptfy from "../services/spotifyService";
 import Loader from "./common/loader";
 import RadarChartCompat from "./graphs/radarChartCompat";
@@ -40,11 +39,8 @@ class DisplayProfile extends Component {
       avg_track_popularity,
       avg_track_energy,
       range,
-      genres,
-      artists,
-      share_url
+      artists
     } = data;
-    const { images } = currentUser;
     const radarData = {
       avg_track_valence,
       avg_track_instru,
@@ -56,8 +52,6 @@ class DisplayProfile extends Component {
     if (loading) return <Loader message={"Getting profile"} />;
 
     if (error) return <>{error}</>;
-
-    const center = "d-flex justify-content-center";
 
     return (
       <>

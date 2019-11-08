@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import sptfy from "../services/spotifyService";
 import Loader from "./common/loader";
 import LogInWithSpotify from "./logInWithSpotify";

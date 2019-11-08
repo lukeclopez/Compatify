@@ -84,17 +84,8 @@ class DisplayCompatifyReport extends Component {
     const {
       overlapping_genres,
       overlapping_artists,
-      overlapping_tracks,
-      differences,
-      average_difference
+      overlapping_tracks
     } = report.content;
-    const {
-      valence_diff,
-      instru_diff,
-      popularity_diff,
-      energy_diff,
-      range_diff
-    } = differences;
 
     if (error) return <>{error}</>;
 

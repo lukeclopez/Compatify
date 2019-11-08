@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
 import sptfy from "../services/spotifyService";
 import Loader from "./common/loader";
-import DisplayCompatifyReport from "./displayCompatifyReport";
 
 class LoggedIn extends Component {
   state = { data: {}, loading: true, profileExists: true };

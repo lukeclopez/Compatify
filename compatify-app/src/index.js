@@ -22,11 +22,11 @@ function makeRepeated(arr, length) {
 
 ReactDOM.render(
   <>
-    {/* <ScrollingColorBackground
+    <ScrollingColorBackground
       selector=".js-color-stop[data-background-color]"
       colorDataAttribute="data-background-color"
       initialRgb="rgb(0, 0, 0)"
-    /> */}
+    />
     <BrowserRouter>
       <App />
     </BrowserRouter>

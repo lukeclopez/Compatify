@@ -18,6 +18,7 @@ const Tracks = props => {
             <img
               src={t.album.images[0] && t.album.images[0].url}
               className="card-img-top"
+              alt=""
               style={style}
             />
             <div className="card-body">

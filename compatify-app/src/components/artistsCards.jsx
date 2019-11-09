@@ -13,36 +13,40 @@ const ArtistsCards = props => {
   };
   return (
     <CardColumn titleText={titleText}>
-      {artists.map(a => {
-        return (
-          <React.Fragment key={shortid.generate()}>
-            <div className="card text-white bg-dark mb-3">
-              <img
-                src={a.images[0] && a.images[0].url}
-                className="card-img-top"
-                alt=""
-                style={style}
-              />
-              <div className="card-body">
-                <h5 className="card-title">{a.name}</h5>
-                <p className="card-text">
-                  <b>Popularity: </b>
-                  {a.popularity}/100
-                </p>
-                <p className="card-text">
-                  <b>Genres: </b>
-                  {a.genres.map(g => (
-                    <li key={g}>{g}</li>
-                  ))}
-                </p>
-                <a href={a.external_urls.spotify} className="btn btn-primary">
-                  View on Spotify
-                </a>
+      {artists &&
+        artists.map(a => {
+          return (
+            <React.Fragment key={shortid.generate()}>
+              <div className="card text-white bg-dark mb-3">
+                <img
+                  src={a.images[0] && a.images[0].url}
+                  className="card-img-top"
+                  alt=""
+                  style={style}
+                />
+                <div className="card-body">
+                  <h5 className="card-title">{a.name}</h5>
+                  <p className="card-text">
+                    <b>Popularity: </b>
+                    {a.popularity}/100
+                  </p>
+                  <p className="card-text">
+                    <b>Genres: </b>
+                    {a.genres.map(g => (
+                      <li key={g}>{g}</li>
+                    ))}
+                  </p>
+                  <a
+                    href={a.external_urls.spotify}
+                    className="btn btn-secondary"
+                  >
+                    View on Spotify
+                  </a>
+                </div>
               </div>
-            </div>
-          </React.Fragment>
-        );
-      })}
+            </React.Fragment>
+          );
+        })}
     </CardColumn>
   );
 };

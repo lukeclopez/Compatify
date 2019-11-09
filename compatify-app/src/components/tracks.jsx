@@ -12,29 +12,30 @@ const Tracks = props => {
   };
   return (
     <CardColumn>
-      {tracks.map((t, index) => {
-        return (
-          <div key={index} className="card text-white bg-dark mb-3">
-            <img
-              src={t.album.images[0] && t.album.images[0].url}
-              className="card-img-top"
-              alt=""
-              style={style}
-            />
-            <div className="card-body">
-              <h5 className="card-title">{t.name}</h5>
-              <h6 className="card-title">{t.artists[0].name}</h6>
-              <p className="card-text">
-                <b>Popularity: </b>
-                {t.popularity}/100
-              </p>
-              <a href={t.external_urls.spotify} className="btn btn-primary">
-                View on Spotify
-              </a>
+      {tracks &&
+        tracks.map((t, index) => {
+          return (
+            <div key={index} className="card text-white bg-dark mb-3">
+              <img
+                src={t.album.images[0] && t.album.images[0].url}
+                className="card-img-top"
+                alt=""
+                style={style}
+              />
+              <div className="card-body">
+                <h5 className="card-title">{t.name}</h5>
+                <h6 className="card-title">{t.artists[0].name}</h6>
+                <p className="card-text">
+                  <b>Popularity: </b>
+                  {t.popularity}/100
+                </p>
+                <a href={t.external_urls.spotify} className="btn btn-secondary">
+                  View on Spotify
+                </a>
+              </div>
             </div>
-          </div>
-        );
-      })}
+          );
+        })}
     </CardColumn>
   );
 };

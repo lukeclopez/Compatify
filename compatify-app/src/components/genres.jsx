@@ -5,13 +5,14 @@ const Genres = props => {
 
   return (
     <>
-      {genres.map((g, index) => {
-        return (
-          <span index={index} class="badge badge-dark mx-1">
-            {g}
-          </span>
-        );
-      })}
+      {genres &&
+        genres.map((g, index) => {
+          return (
+            <span index={index} class="badge badge-dark mx-1">
+              {g}
+            </span>
+          );
+        })}
     </>
   );
 };

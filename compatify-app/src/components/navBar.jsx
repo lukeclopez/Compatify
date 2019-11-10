@@ -5,7 +5,8 @@ const NavBar = props => {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <Link className="navbar-brand" to="/">
-        Compatify {process.env.REACT_APP_DEVELOPMENT ? "(Dev Mode)" : ""}
+        Compatify{" "}
+        {process.env.REACT_APP_DEVELOPMENT === "true" ? "(Dev Mode)" : ""}
       </Link>
       <button
         className="navbar-toggler"

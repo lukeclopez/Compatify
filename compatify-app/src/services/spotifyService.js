@@ -1,9 +1,10 @@
 import http from "./httpService";
 import qs from "qs";
 
-const apiUrl = process.env.REACT_APP_DEVELOPMENT
-  ? "http://localhost:8000/api"
-  : "http://167.172.239.37:45041/api";
+const apiUrl =
+  process.env.REACT_APP_DEVELOPMENT === "true"
+    ? "http://localhost:8000/api"
+    : "https://api.compatify.io/api";
 
 const authUrlKey = "authUrl";
 const userIdKey = "spotifyUserId";

@@ -1,9 +1,10 @@
 import http from "./httpService";
 import qs from "qs";
 
-const apiUrl = process.env.API_URL
-  ? process.env.API_URL
+const apiUrl = process.env.NETLIFY
+  ? "http://167.172.239.37:45041/api"
   : "http://localhost:8000/api";
+
 const authUrlKey = "authUrl";
 const userIdKey = "spotifyUserId";
 const spotifyCodeUrlKey = "spotifyCodeUrl";

@@ -2,7 +2,6 @@
   command = "npm run build"
   publish = "/build"
   base = "compatify-app"
-  API_URL = "http://167.172.239.37:45041/api"
 
   [[redirects]]
   from = "/*"

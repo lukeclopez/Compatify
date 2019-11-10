@@ -1,5 +1,5 @@
 [build]
-  command = "npm run build && chmod a+x ./createEnv.js && ./createEnv.js"
+  command = "npm run build"
   publish = "/build"
   base = "compatify-app"
 

@@ -1,7 +1,7 @@
 import http from "./httpService";
 import qs from "qs";
 
-const apiUrl = process.env.NETLIFY
+const apiUrl = process.env.PRODUCTION
   ? "http://167.172.239.37:45041/api"
   : "http://localhost:8000/api";
 

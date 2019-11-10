@@ -1,7 +1,9 @@
 import http from "./httpService";
-import { apiUrl } from "../config.json";
 import qs from "qs";
 
+const apiUrl = process.env.API_URL
+  ? process.env.API_URL
+  : "http://localhost:8000/api";
 const authUrlKey = "authUrl";
 const userIdKey = "spotifyUserId";
 const spotifyCodeUrlKey = "spotifyCodeUrl";

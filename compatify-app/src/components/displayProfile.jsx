@@ -53,6 +53,8 @@ class DisplayProfile extends Component {
 
     if (error) return <>{error}</>;
 
+    console.log(process.env.API_URL);
+
     return (
       <>
         <BioCard currentUser={currentUser} data={data} />

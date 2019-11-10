@@ -159,6 +159,7 @@ export default {
   getSharedProfile,
   getRefreshToken,
   getUserShareUrl,
+  getSpotifyUser,
   getNewShareUrl,
   removeShareUrl,
   createProfile,

@@ -78,19 +78,13 @@ class CreateCompatifyReport extends Component {
   };
 
   render() {
-    const { loading, error, user1Data, user2Data } = this.state;
+    const { loading, error, report } = this.state;
 
     if (loading)
       return <Loader message={"Calculating musical compatibility"} />;
     if (error) return <>{error}</>;
 
-    console.log(user2Data);
-
-    return (
-      <Redirect
-        to={`/display-report/${user1Data.user_id}/${user2Data.user_id}`}
-      />
-    );
+    return <Redirect to={`/display-report/${report.id}`} />;
   }
 }
 export default CreateCompatifyReport;

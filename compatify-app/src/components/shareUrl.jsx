@@ -1,4 +1,7 @@
 import React, { Component } from "react";
+import { CopyToClipboard } from "react-copy-to-clipboard";
+import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
 import sptfy from "../services/spotifyService";
 
 class ShareUrl extends Component {
@@ -12,17 +15,31 @@ class ShareUrl extends Component {
 
   render() {
     const { url, loading } = this.state;
+    const shareUrl = `compatify.io/p${url}`;
 
     return (
       <>
-        {url ? (
-          <h3>compatify.io/p{url}</h3>
-        ) : (
-          <p>Click the button below to generate a share url.</p>
-        )}
-
+        <div>
+          <span className="border border-secondary rounded p-1">
+            <Link className="text-white" to={`p${url}`}>
+              {shareUrl}
+            </Link>
+          </span>
+          <CopyToClipboard
+            text={shareUrl}
+            onCopy={() => toast.success("Copied!")}
+          >
+            <button className="btn btn-sm btn-secondary ml-3">
+              <i className="fa fa-copy"></i>
+            </button>
+          </CopyToClipboard>
+        </div>
+        <div>
+          Copy this link to let others see your partial profile and Compatify
+          with you.
+        </div>
         <button
-          className="btn btn-primary"
+          className="btn btn-primary m-3"
           onClick={this.newShareUrl}
           disabled={loading}
         >

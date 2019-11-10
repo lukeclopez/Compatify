@@ -31,7 +31,7 @@ class MyReports extends Component {
               {reports.map(r => {
                 return (
                   <li key={r.creation_date + r.id}>
-                    <Link to={`/display-report/${r.id}`}>
+                    <Link className="text-white" to={`/display-report/${r.id}`}>
                       You and {r.user2_name}, {r.creation_date}
                     </Link>
                   </li>

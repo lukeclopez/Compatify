@@ -1,9 +1,9 @@
 import http from "./httpService";
 import qs from "qs";
 
-const apiUrl = process.env.PRODUCTION
-  ? "http://167.172.239.37:45041/api"
-  : "http://localhost:8000/api";
+const apiUrl = process.env.REACT_APP_DEVELOPMENT
+  ? "http://localhost:8000/api"
+  : "http://167.172.239.37:45041/api";
 
 const authUrlKey = "authUrl";
 const userIdKey = "spotifyUserId";

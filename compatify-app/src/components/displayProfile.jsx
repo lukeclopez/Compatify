@@ -14,12 +14,14 @@ class DisplayProfile extends Component {
   }
 
   getProfileData = async () => {
-    const refreshToken = sptfy.getRefreshToken();
-    if (!refreshToken) {
-      this.props.history.push("/login");
+    const { user, getUser } = this.props;
+    const forceLogin = true;
+
+    if (!user.id) {
+      getUser(forceLogin);
       return null;
     }
-    const currentUser = await sptfy.getCurrentSpotifyUser(refreshToken);
+
     try {
       const data = await sptfy.getProfile(currentUser.data.id);
       this.setState({ data, currentUser: currentUser.data, loading: false });

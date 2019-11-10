@@ -1,32 +1,36 @@
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
+import { Nav, Navbar } from "react-bootstrap";
 
-const NavBar = props => {
+const NavBar = () => {
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-      <Link className="navbar-brand" to="/">
-        Compatify{" "}
-        {process.env.REACT_APP_DEVELOPMENT === "true" ? "(Dev Mode)" : ""}
-      </Link>
-      <button
-        className="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbarNavAltMarkup"
-        aria-controls="navbarNavAltMarkup"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
+    <>
+      <Navbar
+        className="navbar navbar-expand-lg navbar-dark bg-dark"
+        collapseOnSelect
+        expand="lg"
       >
-        <span className="navbar-toggler-icon" />
-      </button>
-      <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div className="navbar-nav">
-          <NavLink className="nav-item nav-link" to="/profile">
-            My Profile
-          </NavLink>
-        </div>
-      </div>
-    </nav>
+        <NavLink className="navbar-brand" eventKey="1" as={Link} to="/">
+          Compatify{" "}
+          {process.env.REACT_APP_DEVELOPMENT === "true" ? "(Dev Mode)" : ""}
+        </NavLink>
+        <Navbar.Toggle />
+        <Navbar.Collapse>
+          <Nav className="mr-auto d-block">
+            <Nav.Item>
+              <NavLink
+                className="nav-item nav-link"
+                eventKey="1"
+                as={Link}
+                to="/profile"
+              >
+                My Profile
+              </NavLink>
+            </Nav.Item>
+          </Nav>
+        </Navbar.Collapse>
+      </Navbar>
+    </>
   );
 };
 

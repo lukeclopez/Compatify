@@ -8,7 +8,7 @@ class LoggedIn extends Component {
 
   async componentDidMount() {
     const currentUrl = window.location;
-    this.saveRefreshToken(currentUrl);
+    await this.saveRefreshToken(currentUrl);
 
     const refreshToken = sptfy.getRefreshToken();
     const response = await sptfy.getCurrentSpotifyUser(refreshToken);

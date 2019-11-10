@@ -1,13 +1,13 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import sptfy from "../services/spotifyService";
 import Loader from "./common/loader";
 import RadarChartCompat from "./graphs/radarChartCompat";
-import ShareUrl from "./shareUrl";
+import BioCard from "./bioCard";
 import MyReports from "./myReports";
+import ArtistsCards from "./artistsCards";
 
 class DisplayProfile extends Component {
-  state = { data: {}, loading: true, error: "" };
+  state = { data: {}, currentUser: {}, loading: true, error: "" };
 
   componentDidMount() {
     this.getProfileData();
@@ -23,8 +23,8 @@ class DisplayProfile extends Component {
     }
 
     try {
-      const data = await sptfy.getProfile(user.id);
-      this.setState({ data, loading: false });
+      const data = await sptfy.getProfile(currentUser.data.id);
+      this.setState({ data, currentUser: currentUser.data, loading: false });
     } catch (ex) {
       if (ex.response && ex.response.status === 404) {
         this.setState({ loading: false, error: "Could not find profile!" });
@@ -33,7 +33,7 @@ class DisplayProfile extends Component {
   };
 
   render() {
-    const { data, loading, error } = this.state;
+    const { data, currentUser, loading, error } = this.state;
     const {
       user_id,
       avg_track_valence,
@@ -41,9 +41,7 @@ class DisplayProfile extends Component {
       avg_track_popularity,
       avg_track_energy,
       range,
-      genres,
-      artists,
-      share_url
+      artists
     } = data;
     const radarData = {
       avg_track_valence,
@@ -57,30 +55,18 @@ class DisplayProfile extends Component {
 
     if (error) return <>{error}</>;
 
+    console.log(process.env.API_URL);
+
     return (
       <>
-        <h1>{user_id}</h1>
-        <Link to="/create-profile">
-          <button className="btn btn-primary">Update Profile</button>
-        </Link>
+        <BioCard currentUser={currentUser} data={data} />
 
-        <ShareUrl userId={user_id} shareUrl={share_url} />
-
-        <RadarChartCompat name={user_id} data={radarData} />
-        <p>
-          <h4>My Reports</h4>
+        <div className="card-deck">
+          <RadarChartCompat name={user_id} data={radarData} />
           <MyReports userId={user_id} />
-        </p>
-        <h4>Genres</h4>
-        {genres.map((g, index) => {
-          return <li key={index}>{g}</li>;
-        })}
-        <h4>Artists</h4>
-        <ul>
-          {artists.map((a, index) => {
-            return <li key={index}>{a.name}</li>;
-          })}
-        </ul>
+        </div>
+
+        <ArtistsCards artists={artists} />
       </>
     );
   }

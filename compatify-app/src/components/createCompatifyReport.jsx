@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
 import sptfy from "../services/spotifyService";
 import Loader from "./common/loader";
-import DisplayCompatifyReport from "./displayCompatifyReport";
 
 class CreateCompatifyReport extends Component {
   state = {
@@ -80,6 +79,8 @@ class CreateCompatifyReport extends Component {
     if (loading)
       return <Loader message={"Calculating musical compatibility"} />;
     if (error) return <>{error}</>;
+
+    console.log(user2Data);
 
     return (
       <Redirect

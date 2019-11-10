@@ -66,14 +66,8 @@ class App extends Component {
             <Route path="/logged-in" component={LoggedIn} />
             <Route path="/compatify" component={CreateCompatifyReport} />
             <Route
-              path="/display-report/:user1Id/:user2Id"
-              render={props => (
-                <DisplayCompatifyReport
-                  {...props}
-                  user={user}
-                  getUser={this.getCurrentUserData}
-                />
-              )}
+              path="/display-report/:pk"
+              component={DisplayCompatifyReport}
             />
             <Route path="/not-found" component={NotFound} />
             <Route

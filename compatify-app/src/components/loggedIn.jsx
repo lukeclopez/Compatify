@@ -2,19 +2,17 @@ import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
 import sptfy from "../services/spotifyService";
 import Loader from "./common/loader";
-import DisplayCompatifyReport from "./displayCompatifyReport";
 
 class LoggedIn extends Component {
   state = { data: {}, loading: true, profileExists: true };
 
-  componentDidMount() {
-    const userId = sptfy.getUserId();
+  async componentDidMount() {
     const currentUrl = window.location;
-
-    this.getProfileData(userId);
     this.saveRefreshToken(currentUrl);
 
-    // this.props.onLogin();
+    const refreshToken = sptfy.getRefreshToken();
+    const response = await sptfy.getCurrentSpotifyUser(refreshToken);
+    this.getProfileData(response.data.id);
   }
 
   getProfileData = async userId => {

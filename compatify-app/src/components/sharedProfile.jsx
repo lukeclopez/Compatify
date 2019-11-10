@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import sptfy from "../services/spotifyService";
 import Loader from "./common/loader";
 import LogInWithSpotify from "./logInWithSpotify";
@@ -16,7 +15,7 @@ class SharedProfile extends Component {
     const code = this.props.match.params.shareCode;
     try {
       const data = await sptfy.getSharedProfile(code);
-      this.setState({ data: data.data, loading: false });
+      this.setState({ data, loading: false });
     } catch (ex) {
       if (ex.response && ex.response.status === 404) {
         this.setState({ loading: false, error: "Invalid code!" });

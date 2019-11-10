@@ -16,7 +16,7 @@ class ShareUrl extends Component {
     return (
       <>
         {url ? (
-          <h3>Share: compatify.io/p{url}</h3>
+          <h3>compatify.io/p{url}</h3>
         ) : (
           <p>Click the button below to generate a share url.</p>
         )}

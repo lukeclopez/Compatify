@@ -1,7 +1,9 @@
 import http from "./httpService";
-import { apiUrl } from "../config.json";
 import qs from "qs";
 
+const apiUrl = process.env.API_URL
+  ? process.env.API_URL
+  : "http://localhost:8000/api";
 const authUrlKey = "authUrl";
 const userIdKey = "spotifyUserId";
 const spotifyCodeUrlKey = "spotifyCodeUrl";
@@ -33,6 +35,10 @@ export function saveSpotifyUserId(UserId) {
 
 export function getSpotifyUserId() {
   return localStorage.getItem(userIdKey);
+}
+
+export function removeSpotifyUserId() {
+  return localStorage.removeItem(userIdKey);
 }
 
 export function saveRefreshToken(refreshToken) {
@@ -68,8 +74,16 @@ export function getSpotifyUser(userId) {
   return http.get(apiUrl + `/get_spotify_user/?user_id=${userId}`);
 }
 
-export function getSharedProfile(shareUrl) {
-  return http.get(apiUrl + `/get_shared_profile/?code=${shareUrl}`);
+export async function getSpotifyUserByPk(pk) {
+  const response = await http.get(apiUrl + `/get_spotify_user_by_pk/?pk=${pk}`);
+  return response.data;
+}
+
+export async function getSharedProfile(shareUrl) {
+  const response = await http.get(
+    apiUrl + `/get_shared_profile/?code=${shareUrl}`
+  );
+  return response.data;
 }
 
 export function createCompatibilityReport(userId, shareUrl) {
@@ -77,10 +91,8 @@ export function createCompatibilityReport(userId, shareUrl) {
   return http.post(apiUrl + "/compatify/", qs.stringify(data));
 }
 
-export function getCompatibilityReport(userId1, userId2) {
-  return http.get(
-    apiUrl + `/get_report/?user_1_id=${userId1}&user_2_id=${userId2}`
-  );
+export function getCompatibilityReport(pk) {
+  return http.get(apiUrl + `/get_report/?pk=${pk}`);
 }
 
 export function getToken(url) {
@@ -100,7 +112,10 @@ export function getUserId() {
 }
 
 export async function getCurrentSpotifyUser(refreshToken) {
-  if (!refreshToken) return null;
+  if (!refreshToken) {
+    removeSpotifyUserId();
+    return null;
+  }
 
   const payload = `refresh_token=${refreshToken}`;
   const currentUser = await http.post(apiUrl + "/get_current_user/", payload);
@@ -116,9 +131,7 @@ export function getUserShareUrl(userId) {
 export async function getNewShareUrl() {
   const refreshToken = getRefreshToken();
   const { data } = await getCurrentSpotifyUser(refreshToken);
-  const newShareUrl = http.get(
-    apiUrl + "/new_share_url/" + `?user_id=${data.id}`
-  );
+  const newShareUrl = http.get(apiUrl + `/new_share_url/?user_id=${data.id}`);
   return newShareUrl;
 }
 
@@ -137,6 +150,7 @@ export default {
   getCurrentSpotifyUser,
   getAllReportsForUser,
   removeRefreshToken,
+  getSpotifyUserByPk,
   saveSpotifyUserId,
   getSpotifyUserId,
   saveRefreshToken,

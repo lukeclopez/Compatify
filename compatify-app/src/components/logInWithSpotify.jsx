@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import sptfy from "../services/spotifyService";
 
 class LogInWithSpotify extends Component {
@@ -18,7 +17,7 @@ class LogInWithSpotify extends Component {
 
   render() {
     return (
-      <button className="btn btn-primary" onClick={this.logInWithSpotify}>
+      <button className="btn btn-secondary" onClick={this.logInWithSpotify}>
         {this.props.message || "Log in with Spotify"}
       </button>
     );

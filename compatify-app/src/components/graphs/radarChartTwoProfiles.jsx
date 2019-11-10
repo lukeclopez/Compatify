@@ -54,10 +54,13 @@ class RadarChartTwoProfiles extends Component {
     const radarData = this.makeDataObject(data1, data2);
 
     return (
+            <div class="card text-white bg-dark mb-3">
+            <div class="card-body">
+          <p class="card-text">
       <RadarChart outerRadius={120} width={500} height={400} data={radarData}>
-        <PolarGrid />
-        <PolarAngleAxis dataKey="trait" />
-        <PolarRadiusAxis angle={30} domain={[0, 1]} />
+        <PolarGrid stroke="#ffffff" />
+        <PolarAngleAxis dataKey="trait" stroke="#ffffff"/>
+        <PolarRadiusAxis angle={18} domain={[0, 1]} />
         <Radar
           name={data1.user_id}
           dataKey="A"
@@ -75,6 +78,9 @@ class RadarChartTwoProfiles extends Component {
         <Legend />
         <Tooltip />
       </RadarChart>
+      </p>
+      </div>
+      </div>
     );
   }
 }

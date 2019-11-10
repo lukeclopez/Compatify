@@ -6,7 +6,8 @@ import {
   PolarRadiusAxis,
   Radar,
   Legend,
-  Tooltip
+  Tooltip,
+  ResponsiveContainer
 } from "recharts";
 
 class RadarChartCompat extends Component {
@@ -57,25 +58,27 @@ class RadarChartCompat extends Component {
     return (
       <div className="card text-white bg-dark mb-3">
         <div className="card-body">
-          <RadarChart
-            outerRadius={120}
-            width={500}
-            height={300}
-            data={radarData}
-          >
-            <PolarGrid stroke="#ffffff" />
-            <PolarAngleAxis dataKey="trait" stroke="#ffffff" />
-            <PolarRadiusAxis angle={18} domain={[0, 1]} />
-            <Radar
-              name={name}
-              dataKey="A"
-              stroke="#8884d8"
-              fill="#8884d8"
-              fillOpacity={0.6}
-            />
-            <Legend />
-            <Tooltip wrapperStyle={{ color: "black" }} />
-          </RadarChart>
+          <ResponsiveContainer width="100%" height={400}>
+            <RadarChart
+              outerRadius={120}
+              width={500}
+              height={300}
+              data={radarData}
+            >
+              <PolarGrid stroke="#ffffff" />
+              <PolarAngleAxis dataKey="trait" stroke="#ffffff" />
+              <PolarRadiusAxis angle={18} domain={[0, 1]} />
+              <Radar
+                name={name}
+                dataKey="A"
+                stroke="#8884d8"
+                fill="#8884d8"
+                fillOpacity={0.6}
+              />
+              <Legend />
+              <Tooltip wrapperStyle={{ color: "black" }} />
+            </RadarChart>
+          </ResponsiveContainer>
         </div>
       </div>
     );

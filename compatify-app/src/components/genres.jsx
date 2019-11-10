@@ -1,4 +1,5 @@
 import React from "react";
+import shortid from "shortid";
 
 const Genres = props => {
   const { genres } = props;
@@ -6,9 +7,9 @@ const Genres = props => {
   return (
     <>
       {genres &&
-        genres.map((g, index) => {
+        genres.map(g => {
           return (
-            <span index={index} class="badge badge-dark mx-1">
+            <span key={shortid()} className="badge badge-dark mx-1">
               {g}
             </span>
           );

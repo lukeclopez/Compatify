@@ -61,11 +61,7 @@ class BioCard extends Component {
             </>
           )}
           {activeTab === sharing && (
-            <>
-              <p className="card-text">
-                <ShareUrl userId={id} shareUrl={data.share_url} />
-              </p>
-            </>
+            <ShareUrl userId={id} shareUrl={data.share_url} />
           )}
           {activeTab === options && (
             <>

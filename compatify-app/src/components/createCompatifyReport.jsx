@@ -26,7 +26,7 @@ class CreateCompatifyReport extends Component {
       console.log(ex);
       this.setState({
         loading: false,
-        error: "Couldn't create compatibility report."
+        error: ex
       });
     }
   }
@@ -73,6 +73,10 @@ class CreateCompatifyReport extends Component {
     sptfy.removeShareUrl();
 
     const report = await sptfy.createCompatibilityReport(userId, shareUrl);
+
+    if (!report.data.id) {
+      throw "For some reason, the server didn't give us the report ID, which is bad.";
+    }
 
     return report.data;
   };

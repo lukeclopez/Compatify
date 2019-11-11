@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import sptfy from "../services/spotifyService";
 import Loader from "./common/loader";
-import RadarChartTwoProfiles from "./graphs/radarChartTwoProfiles";
+import RadarChartCompat from "./graphs/radarChartCompat";
 import ReportTitleCard from "./reportTitleCard";
 import ArtistsCards from "./artistsCards";
 import Genres from "./genres";
@@ -101,7 +101,7 @@ class DisplayCompatifyReport extends Component {
           report={report}
         />
 
-        <RadarChartTwoProfiles data1={user1Data} data2={user2Data} />
+        <RadarChartCompat data={[user1Data, user2Data]} />
 
         <h4>Genres in Common</h4>
         <Genres genres={overlapping_genres} />

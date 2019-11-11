@@ -32,22 +32,7 @@ class DisplayProfile extends Component {
 
   render() {
     const { data, currentUser, loading, error } = this.state;
-    const {
-      user_id,
-      avg_track_valence,
-      avg_track_instru,
-      avg_track_popularity,
-      avg_track_energy,
-      range,
-      artists
-    } = data;
-    const radarData = {
-      avg_track_valence,
-      avg_track_instru,
-      avg_track_popularity,
-      avg_track_energy,
-      range
-    };
+    const { user_id, artists } = data;
 
     if (loading) return <Loader message={"Getting profile"} />;
 
@@ -58,7 +43,7 @@ class DisplayProfile extends Component {
         <BioCard currentUser={currentUser} data={data} />
 
         <div className="card-deck">
-          <RadarChartCompat name={user_id} data={radarData} />
+          <RadarChartCompat name={user_id} data={[data]} />
           <MyReports userId={user_id} />
         </div>
 

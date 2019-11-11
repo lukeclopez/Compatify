@@ -11,45 +11,71 @@ import {
 } from "recharts";
 import CustomTooltipContent from "../common/customTooltipContent";
 
+const baseData = [
+  {
+    trait: "V",
+    fullMark: 1
+  },
+  {
+    trait: "I",
+    fullMark: 1
+  },
+  {
+    trait: "P",
+    fullMark: 1
+  },
+  {
+    trait: "E",
+    fullMark: 1
+  },
+  {
+    trait: "R",
+    fullMark: 1
+  }
+];
+
 class RadarChartCompat extends Component {
   state = {};
 
-  makeDataObject = data => {
-    const {
-      avg_track_valence,
-      avg_track_instru,
-      avg_track_popularity,
-      avg_track_energy,
-      range
-    } = data;
+  makeDataObject = profileOrProfiles => {
+    const metricsArr = profileOrProfiles.map(p => {
+      const {
+        avg_track_valence,
+        avg_track_instru,
+        avg_track_popularity,
+        avg_track_energy,
+        range
+      } = p;
+      const metrics = {
+        avg_track_valence,
+        avg_track_instru,
+        avg_track_popularity,
+        avg_track_energy,
+        range
+      };
+      return metrics;
+    });
 
-    return [
-      {
-        trait: "V",
-        A: avg_track_valence,
-        fullMark: 1
-      },
-      {
-        trait: "I",
-        A: avg_track_instru,
-        fullMark: 1
-      },
-      {
-        trait: "P",
-        A: avg_track_popularity,
-        fullMark: 1
-      },
-      {
-        trait: "E",
-        A: avg_track_energy,
-        fullMark: 1
-      },
-      {
-        trait: "R",
-        A: range,
-        fullMark: 1
-      }
-    ];
+    if (metricsArr.length === 1) {
+      const values = Object.values(metricsArr[0]);
+      console.log(values);
+
+      const data = baseData.map((obj, index) => {
+        return { ...obj, A: values[index] };
+      });
+
+      return data;
+    } else if (metricsArr.length === 2) {
+      const values = metricsArr.map(m => {
+        return Object.values(m);
+      });
+
+      const data = baseData.map((obj, index) => {
+        return { ...obj, A: values[0][index], B: values[1][index] };
+      });
+
+      return data;
+    }
   };
 
   render() {
@@ -70,15 +96,23 @@ class RadarChartCompat extends Component {
               <PolarAngleAxis dataKey="trait" stroke="#ffffff" />
               <PolarRadiusAxis angle={18} domain={[0, 1]} />
               <Radar
-                name={name}
+                name={data[0].user_id}
                 dataKey="A"
                 stroke="#8884d8"
                 fill="#8884d8"
                 fillOpacity={0.6}
               />
+              {data[1] && (
+                <Radar
+                  name={data[1].user_id}
+                  dataKey="B"
+                  stroke="#800000"
+                  fill="#800000"
+                  fillOpacity={0.6}
+                />
+              )}
               <Legend />
-              <Tooltip content={<CustomTooltipContent />}
-              />
+              <Tooltip content={<CustomTooltipContent />} />
             </RadarChart>
           </ResponsiveContainer>
         </div>

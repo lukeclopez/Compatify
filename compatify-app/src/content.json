@@ -1,0 +1,7 @@
+{
+  "valence_explanation": "Does the music lean toward the happy side, or the sad side? Higher numbers tend to be happier, lower numbers tend to be sadder.",
+  "instrumentalness_explanation": "Is the music more about the instruments or the vocals? Higher numbers mean more emphasis on instruments, lower numbers mean more emphasis on vocals.",
+  "popularity_explanation": "How many Spotify users also listen to this music? Higher numbers mean more listeners.",
+  "energy_explanation": "Is the music fast-paced and intense, or relaxed and chill? High numbers mean more intensity.",
+  "range_explanation": "How diverse is the user's music taste? Higher numbers mean more diversity."
+}

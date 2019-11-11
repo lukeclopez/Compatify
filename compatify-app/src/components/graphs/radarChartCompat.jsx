@@ -9,6 +9,7 @@ import {
   Tooltip,
   ResponsiveContainer
 } from "recharts";
+import CustomTooltipContent from "../common/customTooltipContent";
 
 class RadarChartCompat extends Component {
   state = {};
@@ -24,27 +25,27 @@ class RadarChartCompat extends Component {
 
     return [
       {
-        trait: "Valence",
+        trait: "V",
         A: avg_track_valence,
         fullMark: 1
       },
       {
-        trait: "Instrumentalness",
+        trait: "I",
         A: avg_track_instru,
         fullMark: 1
       },
       {
-        trait: "Popularity",
+        trait: "P",
         A: avg_track_popularity,
         fullMark: 1
       },
       {
-        trait: "Energy",
+        trait: "E",
         A: avg_track_energy,
         fullMark: 1
       },
       {
-        trait: "Range",
+        trait: "R",
         A: range,
         fullMark: 1
       }
@@ -58,7 +59,7 @@ class RadarChartCompat extends Component {
     return (
       <div className="card text-white bg-dark mb-3">
         <div className="card-body">
-          <ResponsiveContainer width="100%" height={400}>
+          <ResponsiveContainer height={300}>
             <RadarChart
               outerRadius={120}
               width={500}
@@ -76,7 +77,8 @@ class RadarChartCompat extends Component {
                 fillOpacity={0.6}
               />
               <Legend />
-              <Tooltip wrapperStyle={{ color: "black" }} />
+              <Tooltip content={<CustomTooltipContent />}
+              />
             </RadarChart>
           </ResponsiveContainer>
         </div>

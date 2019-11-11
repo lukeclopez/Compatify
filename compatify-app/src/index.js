@@ -8,8 +8,12 @@ import registerServiceWorker from "./registerServiceWorker";
 import "bootstrap/dist/css/bootstrap.css";
 import "font-awesome/css/font-awesome.css";
 
+const environment =
+  process.env.REACT_APP_DEVELOPMENT === "true" ? "Development" : "Production";
+
 Sentry.init({
-  dsn: "https://c3a2313aa7994c4b80fbae9931738d29@sentry.io/1815389"
+  dsn: "https://c3a2313aa7994c4b80fbae9931738d29@sentry.io/1815389",
+  environment
 });
 
 ReactDOM.render(

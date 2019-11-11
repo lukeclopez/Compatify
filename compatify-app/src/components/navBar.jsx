@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { Nav, Navbar } from "react-bootstrap";
 
 const NavBar = () => {
@@ -10,7 +10,7 @@ const NavBar = () => {
         collapseOnSelect
         expand="lg"
       >
-        <NavLink className="navbar-brand" eventKey="1" as={Link} to="/">
+        <NavLink className="navbar-brand" to="/">
           Compatify{" "}
           {process.env.REACT_APP_DEVELOPMENT === "true" ? "(Dev Mode)" : ""}
         </NavLink>
@@ -18,12 +18,7 @@ const NavBar = () => {
         <Navbar.Collapse>
           <Nav className="mr-auto d-block">
             <Nav.Item>
-              <NavLink
-                className="nav-item nav-link"
-                eventKey="1"
-                as={Link}
-                to="/profile"
-              >
+              <NavLink className="nav-item nav-link" to="/profile">
                 My Profile
               </NavLink>
             </Nav.Item>

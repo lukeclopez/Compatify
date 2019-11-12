@@ -26,7 +26,7 @@ class CreateCompatifyReport extends Component {
       console.log(ex);
       this.setState({
         loading: false,
-        error: ex
+        error: ex.message
       });
     }
   }
@@ -75,7 +75,7 @@ class CreateCompatifyReport extends Component {
     const report = await sptfy.createCompatibilityReport(userId, shareUrl);
 
     if (!report.data.id) {
-      throw "For some reason, the server didn't give us the report ID, which is bad.";
+      throw new Error({ Error: "Empty report ID" });
     }
 
     return report.data;

@@ -27,9 +27,10 @@ class DisplayCompatifyReport extends Component {
         loading: false
       });
     } catch (ex) {
+      console.log(ex);
       this.setState({
         loading: false,
-        error: ex
+        error: ex.message
       });
     }
   }
@@ -73,8 +74,8 @@ class DisplayCompatifyReport extends Component {
   };
 
   getReport = async pk => {
-    if (!pk) {
-      throw "For some reason, the system is trying to get a report with no ID number, which doesn't exactly work, so... yeah.";
+    if (pk === "undefined") {
+      throw new Error("Empty report ID.");
     }
     const report = await sptfy.getCompatibilityReport(pk);
 

@@ -37,7 +37,7 @@ class SharedProfile extends Component {
         <h1>{user_id}</h1>
         {user_id === currentUser &&
           "This is what others will see when they use your share URL."}
-        <RadarChartCompat name={user_id} data={data} />
+        <RadarChartCompat name={user_id} data={[data]} />
         <p>Are you musically compatible with {user_id}?</p>
         <LogInWithSpotify message="Compatify!" compatifyShareUrl={share_url} />
       </>

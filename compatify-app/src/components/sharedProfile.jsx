@@ -33,14 +33,14 @@ class SharedProfile extends Component {
     if (error) return <>{error}</>;
 
     return (
-      <>
+      <div className="text-white">
         <h1>{user_id}</h1>
         {user_id === currentUser &&
           "This is what others will see when they use your share URL."}
         <RadarChartCompat name={user_id} data={[data]} />
         <p>Are you musically compatible with {user_id}?</p>
         <LogInWithSpotify message="Compatify!" compatifyShareUrl={share_url} />
-      </>
+      </div>
     );
   }
 }

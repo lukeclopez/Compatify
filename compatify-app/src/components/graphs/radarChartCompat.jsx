@@ -10,6 +10,7 @@ import {
   ResponsiveContainer
 } from "recharts";
 import CustomTooltipContent from "../common/customTooltipContent";
+import WhiteBottomTransCard from "./../common/whiteBottomTransCard";
 
 const baseData = [
   {
@@ -79,11 +80,11 @@ class RadarChartCompat extends Component {
   };
 
   render() {
-    const { name, data } = this.props;
+    const { data } = this.props;
     const radarData = this.makeDataObject(data);
 
     return (
-      <div className="card text-white bg-dark mb-3">
+      <WhiteBottomTransCard>
         <div className="card-body">
           <ResponsiveContainer height={300}>
             <RadarChart
@@ -94,7 +95,7 @@ class RadarChartCompat extends Component {
             >
               <PolarGrid stroke="#ffffff" />
               <PolarAngleAxis dataKey="trait" stroke="#ffffff" />
-              <PolarRadiusAxis angle={18} domain={[0, 1]} />
+              <PolarRadiusAxis angle={18} domain={[0, 1]} stroke="#ffffff" />
               <Radar
                 name={data[0].user_id}
                 dataKey="A"
@@ -116,7 +117,7 @@ class RadarChartCompat extends Component {
             </RadarChart>
           </ResponsiveContainer>
         </div>
-      </div>
+      </WhiteBottomTransCard>
     );
   }
 }

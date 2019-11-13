@@ -3,6 +3,7 @@ import { CopyToClipboard } from "react-copy-to-clipboard";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 import sptfy from "../services/spotifyService";
+import CompatifyButton from "./common/compatifyButton";
 
 class ShareUrl extends Component {
   state = { url: this.props.shareUrl, loading: false };
@@ -20,7 +21,7 @@ class ShareUrl extends Component {
     return (
       <>
         <div>
-          <span className="border border-secondary rounded p-1">
+          <span className="border border-white rounded-0 p-1">
             <Link className="text-white" to={`p${url}`}>
               {shareUrl}
             </Link>
@@ -29,22 +30,18 @@ class ShareUrl extends Component {
             text={shareUrl}
             onCopy={() => toast.success("Copied!")}
           >
-            <button className="btn btn-sm btn-secondary ml-3">
+            <CompatifyButton classes="btn-sm ml-3">
               <i className="fa fa-copy"></i>
-            </button>
+            </CompatifyButton>
           </CopyToClipboard>
         </div>
         <div>
           Copy this link to let others see your partial profile and Compatify
           with you.
         </div>
-        <button
-          className="btn btn-primary m-3"
-          onClick={this.newShareUrl}
-          disabled={loading}
-        >
+        <CompatifyButton onClick={this.newShareUrl} disabled={loading}>
           {!loading ? "Get a new share URL" : "Getting new URL..."}
-        </button>
+        </CompatifyButton>
       </>
     );
   }

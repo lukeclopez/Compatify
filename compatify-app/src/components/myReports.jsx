@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import sptfy from "../services/spotifyService";
+import WhiteBottomTransCard from "./common/whiteBottomTransCard";
 
 class MyReports extends Component {
   state = { data: {}, loading: true };
@@ -22,25 +23,21 @@ class MyReports extends Component {
     if (!reports) return <>No reports!</>;
 
     return (
-      <>
-        <div className="card text-white bg-dark mb-3">
-          <div className="card-body">
-            <p className="card-text"></p>
-            <h4>My Compatify Reports</h4>
-            <ul>
-              {reports.map(r => {
-                return (
-                  <li key={r.creation_date + r.id}>
-                    <Link className="text-white" to={`/display-report/${r.id}`}>
-                      You and {r.user2_name}, {r.creation_date}
-                    </Link>
-                  </li>
-                );
-              })}
-            </ul>
-          </div>
+      <WhiteBottomTransCard>
+        <div className="card-body">
+          <p className="card-text"></p>
+          <h4>My Compatify Reports</h4>
+          {reports.map(r => {
+            return (
+              <div key={r.creation_date + r.id}>
+                <Link className="text-white" to={`/display-report/${r.id}`}>
+                  You and {r.user2_name}, {r.creation_date}
+                </Link>
+              </div>
+            );
+          })}
         </div>
-      </>
+      </WhiteBottomTransCard>
     );
   }
 }

@@ -6,7 +6,7 @@ const NavBar = () => {
   return (
     <>
       <Navbar
-        className="navbar navbar-expand-lg navbar-dark bg-dark"
+        className="navbar navbar-expand-lg navbar-dark bg-transparent"
         collapseOnSelect
         expand="lg"
       >

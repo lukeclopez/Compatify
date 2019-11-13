@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import sptfy from "../services/spotifyService";
+import CompatifyButton from "./common/compatifyButton";
 
 class LogInWithSpotify extends Component {
   state = {};
@@ -17,9 +18,9 @@ class LogInWithSpotify extends Component {
 
   render() {
     return (
-      <button className="btn btn-secondary" onClick={this.logInWithSpotify}>
+      <CompatifyButton onClick={this.logInWithSpotify}>
         {this.props.message || "Log in with Spotify"}
-      </button>
+      </CompatifyButton>
     );
   }
 }

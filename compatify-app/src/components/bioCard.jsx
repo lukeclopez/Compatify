@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import WhiteBottomTransCard from "./common/whiteBottomTransCard";
+import CompatifyButton from "./common/compatifyButton";
 import NavTab from "./navTab";
 import ShareUrl from "./shareUrl";
 
@@ -23,9 +25,9 @@ class BioCard extends Component {
     const { info, sharing, options } = tabTitles;
 
     return (
-      <div className="card text-white bg-dark mb-3 text-center">
-        <div className="card-header">
-          <ul className="nav nav-tabs card-header-tabs">
+      <WhiteBottomTransCard>
+        <div>
+          <ul className="nav nav-tabs bg-transparent">
             <NavTab
               title={info}
               link="#"
@@ -55,9 +57,14 @@ class BioCard extends Component {
               <p className="card-text">
                 <img src={images[0] && images[0].url} alt="Profile" />
               </p>
-              <a href={external_urls.spotify} className="btn btn-primary">
-                View on Spotify
-              </a>
+              <CompatifyButton>
+                <a
+                  style={{ color: "inherit", textDecoration: "inherit" }}
+                  href={external_urls.spotify}
+                >
+                  View on Spotify
+                </a>
+              </CompatifyButton>
             </>
           )}
           {activeTab === sharing && (
@@ -67,13 +74,13 @@ class BioCard extends Component {
             <>
               <p className="card-text">
                 <Link to="/create-profile">
-                  <button className="btn btn-primary">Update Profile</button>
+                  <CompatifyButton>Update Profile</CompatifyButton>
                 </Link>
               </p>
             </>
           )}
         </div>
-      </div>
+      </WhiteBottomTransCard>
     );
   }
 }

@@ -1,10 +1,12 @@
 import React from "react";
 import CardColumn from "./common/cardColumn";
+import WhiteBottomTransCard from "./common/whiteBottomTransCard";
+import CompatifyButton from "./common/compatifyButton";
 
 const Tracks = props => {
   const { tracks } = props;
   const style = {
-    maxWidth: "50%",
+    maxWidth: "100%",
     height: "auto",
     display: "block",
     marginLeft: "auto",
@@ -15,7 +17,7 @@ const Tracks = props => {
       {tracks &&
         tracks.map((t, index) => {
           return (
-            <div key={index} className="card text-white bg-dark mb-3">
+            <WhiteBottomTransCard key={index}>
               <img
                 src={t.album.images[0] && t.album.images[0].url}
                 className="card-img-top"
@@ -29,11 +31,14 @@ const Tracks = props => {
                   <b>Popularity: </b>
                   {t.popularity}/100
                 </p>
-                <a href={t.external_urls.spotify} className="btn btn-secondary">
+                <a
+                  href={t.external_urls.spotify}
+                  className="btn btn-outline-light"
+                >
                   View on Spotify
                 </a>
               </div>
-            </div>
+            </WhiteBottomTransCard>
           );
         })}
     </CardColumn>

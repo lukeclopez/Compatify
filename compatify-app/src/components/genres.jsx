@@ -9,7 +9,7 @@ const Genres = props => {
       {genres &&
         genres.map(g => {
           return (
-            <span key={shortid()} className="badge badge-dark mx-1">
+            <span key={shortid()} className="badge badge-light mx-1">
               {g}
             </span>
           );

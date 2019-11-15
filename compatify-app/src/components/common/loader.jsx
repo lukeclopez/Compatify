@@ -9,8 +9,8 @@ const Loader = props => {
   };
   return (
     <div className="text-center text-white">
-      <div class="spinner-grow" role="status" style={style}>
-        <span class="sr-only">{props.message}</span>
+      <div className="spinner-grow" role="status" style={style}>
+        <span className="sr-only">{props.message}</span>
       </div>
     </div>
   );

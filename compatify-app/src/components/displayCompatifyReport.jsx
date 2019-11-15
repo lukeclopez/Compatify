@@ -95,7 +95,7 @@ class DisplayCompatifyReport extends Component {
     if (loading) return <Loader message={"Getting Compatify report"} />;
 
     return (
-      <>
+      <div className="text-white">
         <ReportTitleCard
           user1Data={user1Data}
           user2Data={user2Data}
@@ -112,7 +112,7 @@ class DisplayCompatifyReport extends Component {
 
         <h4>Tracks in Common</h4>
         <Tracks tracks={overlapping_tracks} />
-      </>
+      </div>
     );
   }
 }

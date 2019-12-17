@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
+import { confirmAlert } from "react-confirm-alert";
 import WhiteBottomTransCard from "./common/whiteBottomTransCard";
 import CompatifyButton from "./common/compatifyButton";
 import NavTab from "./navTab";
@@ -10,6 +11,23 @@ class BioCard extends Component {
 
   handleChangeTab = tabTitle => {
     this.setState({ activeTab: tabTitle });
+  };
+
+  handleDeleteData = () => {
+    confirmAlert({
+      title: "Delete My Data",
+      message: "Are you sure? This cannot be undone.",
+      buttons: [
+        {
+          label: "Yes",
+          onClick: () => this.props.history.push("/delete-data")
+        },
+        {
+          label: "No",
+          onClick: () => {}
+        }
+      ]
+    });
   };
 
   render() {
@@ -77,6 +95,11 @@ class BioCard extends Component {
                   <CompatifyButton>Update Profile</CompatifyButton>
                 </Link>
               </p>
+              <p className="card-text">
+                <CompatifyButton onClick={this.handleDeleteData}>
+                  Delete My Data
+                </CompatifyButton>
+              </p>
             </>
           )}
         </div>
@@ -85,4 +108,4 @@ class BioCard extends Component {
   }
 }
 
-export default BioCard;
+export default withRouter(BioCard);

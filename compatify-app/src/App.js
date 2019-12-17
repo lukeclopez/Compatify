@@ -9,6 +9,7 @@ import SharedProfile from "./components/sharedProfile";
 import CreateCompatifyReport from "./components/createCompatifyReport";
 import LoggedIn from "./components/loggedIn";
 import NotFound from "./components/notFound";
+import DeleteData from "./components/deleteData";
 import NavBar from "./components/navBar";
 import Logout from "./components/logout";
 import "react-toastify/dist/ReactToastify.css";
@@ -25,6 +26,7 @@ class App extends Component {
             <Route path="/login" component={LogInWithSpotify} />
             <Route path="/logout" component={Logout} />
             <Route path="/create-profile" component={CreateProfile} />
+            <Route path="/delete-data" component={DeleteData} />
             <Route path="/logged-in" component={LoggedIn} />
             <Route path="/compatify" component={CreateCompatifyReport} />
             <Route

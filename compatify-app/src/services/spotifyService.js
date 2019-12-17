@@ -62,6 +62,10 @@ export function createProfile(userId, refreshToken) {
   );
 }
 
+export function deleteData(userId) {
+  return http.get(apiUrl + `/delete_data/?user_id=${userId}`);
+}
+
 export async function getProfile(userId) {
   const profile = await http.get(apiUrl + `/get_profile/?user_id=${userId}`);
   const spotifyUser = await getSpotifyUser(userId);
@@ -166,6 +170,7 @@ export default {
   saveShareUrl,
   getShareUrl,
   getProfile,
+  deleteData,
   getAuthUrl,
   getUserId,
   getToken

@@ -20,13 +20,17 @@ class MyReports extends Component {
     const { reports } = data;
 
     if (loading) return <>Getting reports...</>;
-    if (!reports) return <>No reports!</>;
 
     return (
       <WhiteBottomTransCard>
         <div className="card-body">
-          <p className="card-text"></p>
           <h4>My Compatify Reports</h4>
+          {reports.length === 0 && (
+            <p className="card-text">
+              No reports yet! Share your Compatify link with a friend to get
+              started.
+            </p>
+          )}
           {reports.map(r => {
             return (
               <div key={r.creation_date + r.id}>

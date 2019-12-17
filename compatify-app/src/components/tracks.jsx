@@ -1,7 +1,6 @@
 import React from "react";
 import CardColumn from "./common/cardColumn";
 import WhiteBottomTransCard from "./common/whiteBottomTransCard";
-import CompatifyButton from "./common/compatifyButton";
 
 const Tracks = props => {
   const { tracks } = props;

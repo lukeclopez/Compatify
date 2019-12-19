@@ -1,6 +1,6 @@
 import React from "react";
 import DefaultTooltipContent from "recharts/lib/component/DefaultTooltipContent";
-import { shortDescriptions } from "../../content";
+import { shortDescriptions } from "../../content/viper";
 
 const letterMap = {
   V: "Valence",

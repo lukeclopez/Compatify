@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Route, Redirect, Switch, Link } from "react-router-dom";
+import { Route, Redirect, Switch } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import LogInWithSpotify from "./components/logInWithSpotify";
 import CreateProfile from "./components/createProfile";
@@ -13,6 +13,7 @@ import DeleteData from "./components/deleteData";
 import NavBar from "./components/navBar";
 import Logout from "./components/logout";
 import PrivacyPolicy from "./components/privacyPolicy";
+import Footer from "./components/footer";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 
@@ -42,17 +43,7 @@ class App extends Component {
             <Redirect to="/not-found" />
           </Switch>
         </main>
-        <footer className="footer">
-          <div className="container">
-            <Link className="text-white" to={"/privacy-policy"}>
-              Privacy Policy
-            </Link>
-            &nbsp; | &nbsp;
-            <a className="text-white" href="mailto:mail@compatify.io">
-              mail@compatify.io
-            </a>
-          </div>
-        </footer>
+        <Footer />
       </React.Fragment>
     );
   }

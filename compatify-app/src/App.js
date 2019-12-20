@@ -13,7 +13,7 @@ import DeleteData from "./components/deleteData";
 import NavBar from "./components/navBar";
 import Logout from "./components/logout";
 import PrivacyPolicy from "./components/privacyPolicy";
-import Footer from "./components/footer";
+import Homepage from "./components/homepage";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
 
@@ -39,7 +39,7 @@ class App extends Component {
             <Route path="/profile" component={DisplayProfile} />
             <Route path="/privacy-policy" component={PrivacyPolicy} />
             <Route path="/p:shareCode" component={SharedProfile} />
-            <Redirect from="/" exact to="/login" />
+            <Route path="/" component={Homepage} />
             <Redirect to="/not-found" />
           </Switch>
         </main>

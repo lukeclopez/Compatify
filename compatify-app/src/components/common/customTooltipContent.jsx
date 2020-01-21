@@ -12,12 +12,15 @@ const letterMap = {
 
 const Test = props => {
   const { trait } = props;
+  const style = { color: "black" };
 
+  // At present, the text isn't made black unless
+  // I give each element its own style tag.
   return (
     <>
-      <b>{trait}</b>
-      <div>Is my music taste...</div>
-      <div>{shortDescriptions[trait.toLowerCase()]}</div>
+      <b style={style}>{trait}</b>
+      <div style={style}>Is my music taste...</div>
+      <div style={style}>{shortDescriptions[trait.toLowerCase()]}</div>
     </>
   );
 };
